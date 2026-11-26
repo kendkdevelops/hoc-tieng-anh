@@ -1489,21 +1489,34 @@ Hãy nhận xét ngắn gọn bằng tiếng Việt theo 4 mục rõ ràng:
 3. Gợi ý 2–3 cụm từ/cấu trúc nâng cấp lên C1.
 4. Viết lại phiên bản chuẩn C1 tự nhiên (2–4 câu).`;
 
+    const models = ['gemini-flash-latest', 'gemini-2.5-flash', 'gemini-2.0-flash'];
+    let lastError = 'Lỗi API Gemini';
+
     try {
-      const resp = await fetch(
-        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${encodeURIComponent(
-          state.geminiApiKey
-        )}`,
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            contents: [{ parts: [{ text: prompt }] }]
-          })
+      let data = null;
+      for (const model of models) {
+        const resp = await fetch(
+          `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${encodeURIComponent(
+            state.geminiApiKey
+          )}`,
+          {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              contents: [{ parts: [{ text: prompt }] }]
+            })
+          }
+        );
+        const json = await resp.json();
+        if (resp.ok) {
+          data = json;
+          break;
         }
-      );
-      const data = await resp.json();
-      if (!resp.ok) throw new Error((data.error && data.error.message) || 'Lỗi API Gemini');
+        lastError = (json.error && json.error.message) || `HTTP ${resp.status}`;
+        if (resp.status !== 404) break;
+      }
+
+      if (!data) throw new Error(lastError);
       const reply =
         data.candidates &&
         data.candidates[0] &&
