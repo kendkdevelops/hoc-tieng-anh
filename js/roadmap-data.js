@@ -158,7 +158,7 @@ window.C1_DATA = {
   ],
 
   collocationCategories: [
-    { id: 'all', name: 'Tất cả (42 cụm)' },
+    { id: 'all', name: 'Tất cả (54 cụm)' },
     { id: 'verb-noun', name: 'Verb + Noun (Điểm nghẽn #1)' },
     { id: 'academic', name: 'Học thuật & Công việc (B2–C1)' },
     { id: 'discourse', name: 'Discourse Markers (Nói C1)' },
@@ -508,6 +508,103 @@ window.C1_DATA = {
       trap: 'Chuẩn từ vựng báo chí The Economist / The Guardian.',
       example: 'Passing the B2 milestone test marked a watershed moment in his confidence.',
       exampleVi: 'Vượt qua bài kiểm tra mốc B2 đánh dấu một bước ngoặt lớn về sự tự tin của anh ấy.'
+    },
+    // --- English Collocations in Use (Intermediate & Advanced Additions) ---
+    {
+      id: 'c-43', category: 'verb-noun', level: 'B2', headword: 'measure',
+      chunk: 'take decisive measures', ipa: '/teɪk dɪˈsaɪ.sɪv ˈmeʒ.ərz/',
+      meaning: 'áp dụng các biện pháp quyết liệt',
+      trap: '❌ Không dùng "do measures" hay "make measures" → ✅ "take measures to + V" (English Collocations in Use).',
+      example: 'Authorities must take decisive measures to curb urban air pollution.',
+      exampleVi: 'Chính quyền phải áp dụng các biện pháp quyết liệt để kiềm chế ô nhiễm không khí đô thị.'
+    },
+    {
+      id: 'c-44', category: 'verb-noun', level: 'C1', headword: 'exacerbate',
+      chunk: 'exacerbate a problem', ipa: '/ɪɡˈzæs.ə.beɪt/',
+      meaning: 'làm trầm trọng thêm một vấn đề',
+      trap: '❌ Nâng cấp C1 chuẩn học thuật thay cho "make a problem worse".',
+      example: 'Ignoring minor pronunciation errors can exacerbate comprehension issues later.',
+      exampleVi: 'Phớt lờ các lỗi phát âm nhỏ có thể làm trầm trọng thêm vấn đề nghe hiểu về sau.'
+    },
+    {
+      id: 'c-45', category: 'verb-noun', level: 'C1', headword: 'undermine',
+      chunk: 'undermine confidence', ipa: '/ˌʌn.dəˈmaɪn ˈkɒn.fɪ.dəns/',
+      meaning: 'làm xói mòn / suy yếu sự tự tin (hoặc niềm tin)',
+      trap: 'Collocation chuẩn Cambridge CAE: undermine trust / authority / credibility / confidence.',
+      example: 'Constant self-criticism tends to undermine learners\' speaking confidence.',
+      exampleVi: 'Tự chỉ trích liên tục có xu hướng làm suy yếu sự tự tin khi nói của người học.'
+    },
+    {
+      id: 'c-46', category: 'verb-noun', level: 'C1', headword: 'reap',
+      chunk: 'reap the benefits', ipa: '/riːp ðə ˈben.ɪ.fɪts/',
+      meaning: 'gặt hái thành quả / lợi ích lâu dài',
+      trap: '❌ Thay cho "get benefits" mức B1 → ✅ "reap the benefits / rewards of...".',
+      example: 'After six months of steady practice, you will reap the benefits in every meeting.',
+      exampleVi: 'Sau sáu tháng luyện tập đều đặn, bạn sẽ gặt hái thành quả trong mọi cuộc họp.'
+    },
+    {
+      id: 'c-47', category: 'verb-noun', level: 'B2', headword: 'bear',
+      chunk: 'bear responsibility for', ipa: '/beər rɪˌspɒn.səˈbɪl.ə.ti/',
+      meaning: 'chịu trách nhiệm về (trang trọng)',
+      trap: 'Chuẩn Destination B2/C1: bear / shoulder responsibility for + N/V-ing.',
+      example: 'Both educators and learners bear responsibility for creating an active study environment.',
+      exampleVi: 'Cả người dạy lẫn người học đều chịu trách nhiệm xây dựng môi trường học chủ động.'
+    },
+    {
+      id: 'c-48', category: 'verb-noun', level: 'C1', headword: 'warrant',
+      chunk: 'warrant careful attention', ipa: '/ˈwɒr.ənt ˈkeə.fəl əˈten.ʃən/',
+      meaning: 'xứng đáng được quan tâm / xem xét kỹ lưỡng',
+      trap: 'Rất đắt giá cho bài Report & Proposal C1 thay cho "need attention".',
+      example: 'The gap between passive reading and active writing warrants careful attention.',
+      exampleVi: 'Khoảng cách giữa đọc thụ động và viết chủ động xứng đáng được chú ý kỹ lưỡng.'
+    },
+    {
+      id: 'c-49', category: 'verb-noun', level: 'C1', headword: 'curb',
+      chunk: 'curb emissions', ipa: '/kɜːrb ɪˈmɪʃ.ənz/',
+      meaning: 'kiềm chế / cắt giảm khí thải (hoặc thói quen xấu)',
+      trap: 'Collocation báo chí chuẩn The Economist: curb inflation / curb emissions / curb spending.',
+      example: 'Strict industrial standards are essential to curb carbon emissions globally.',
+      exampleVi: 'Các tiêu chuẩn công nghiệp nghiêm ngặt là thiết yếu để kiềm chế khí thải carbon toàn cầu.'
+    },
+    {
+      id: 'c-50', category: 'verb-noun', level: 'B2', headword: 'harm',
+      chunk: 'do more harm than good', ipa: '/duː mɔːr hɑːrm ðæn ɡʊd/',
+      meaning: 'lợi bất cập hại (gây hại nhiều hơn lợi)',
+      trap: '❌ Luôn dùng DO (không dùng make) với harm/damage/good!',
+      example: 'Memorizing complex C1 idioms without context can do more harm than good.',
+      exampleVi: 'Học thuộc lòng thành ngữ C1 mà không hiểu ngữ cảnh có thể lợi bất cập hại.'
+    },
+    {
+      id: 'c-51', category: 'verb-noun', level: 'C1', headword: 'objection',
+      chunk: 'raise an objection', ipa: '/reɪz ən əbˈdʒek.ʃən/',
+      meaning: 'nêu ra ý kiến phản đối',
+      trap: '❌ Dùng RAISE (ngoại động từ), không dùng "rise an objection".',
+      example: 'Several residents raised strong objections to the proposed highway expansion.',
+      exampleVi: 'Nhiều cư dân đã nêu ra sự phản đối mạnh mẽ đối với đề xuất mở rộng cao tốc.'
+    },
+    {
+      id: 'c-52', category: 'academic', level: 'C1', headword: 'unprecedented',
+      chunk: 'at an unprecedented pace', ipa: '/ʌnˈpres.ɪ.den.tɪd/',
+      meaning: 'với tốc độ chưa từng có tiền lệ',
+      trap: 'Cụm C1 kinh điển cho bài luận về Công nghệ & Toàn cầu hóa (Oxford 5000 C1).',
+      example: 'Generative artificial intelligence is evolving at an unprecedented pace.',
+      exampleVi: 'Trí tuệ nhân tạo tạo sinh đang phát triển với tốc độ chưa từng có tiền lệ.'
+    },
+    {
+      id: 'c-53', category: 'academic', level: 'C1', headword: 'spur',
+      chunk: 'spur economic growth', ipa: '/spɜːr ˌiː.kəˈnɒm.ɪk ɡrəʊθ/',
+      meaning: 'thúc đẩy mạnh mẽ tăng trưởng kinh tế',
+      trap: 'Mạnh mẽ và chuẩn văn phong báo chí hơn "increase economic growth".',
+      example: 'Strategic investment in digital infrastructure can spur long-term economic growth.',
+      exampleVi: 'Đầu tư chiến lược vào hạ tầng số có thể thúc đẩy tăng trưởng kinh tế dài hạn.'
+    },
+    {
+      id: 'c-54', category: 'nuance', level: 'C1', headword: 'utterly',
+      chunk: 'utterly ridiculous / compelling', ipa: '/ˈʌt.ə.li/',
+      meaning: 'hoàn toàn vô lý / cực kỳ thuyết phục (trạng từ nhấn mạnh C1)',
+      trap: '⚠️ Adverb + Adjective Collocation chuẩn CAE: dùng "utterly / deeply / fiercely", tránh lạm dụng "very"!',
+      example: 'Her argument for micro-writing was utterly compelling and backed by clear evidence.',
+      exampleVi: 'Lập luận của cô ấy về phương pháp micro-writing cực kỳ thuyết phục và có bằng chứng rõ ràng.'
     }
   ],
 
@@ -733,6 +830,82 @@ window.C1_DATA = {
           explain: 'Mệnh đề phân từ hoàn thành (Having + V3) diễn đạt hành động xảy ra trước hành động chính.'
         }
       ]
+    },
+    {
+      id: 'gm-impersonal-passive',
+      priority: 'Giáo trình Hewings Units 22–24',
+      level: 'C1',
+      title: 'Bị động khách quan & Tường thuật Học thuật',
+      subtitle: 'It is widely acknowledged that... · is believed to have + V3',
+      summary: 'Cấu trúc không thể thiếu trong Cambridge CAE, IELTS Writing Task 2 và báo cáo C1 (Advanced Grammar in Use — Martin Hewings Units 22–24) để giữ giọng văn khách quan.',
+      textbookRef: 'Advanced Grammar in Use (M. Hewings) Units 22–24 · Destination C1 & C2 (Unit 7 Passive)',
+      referenceUrl: 'https://learnenglish.britishcouncil.org/free-resources/grammar/c1',
+      formulas: [
+        'Khách quan với It: It is widely believed / acknowledged / alleged that + S + V',
+        'Đưa chủ ngữ lên đầu (Hiện tại): S + is/are + thought / reported / expected + TO + V',
+        'Đưa chủ ngữ lên đầu (Quá khứ): S + is/are + believed / alleged + TO HAVE + V3'
+      ],
+      b1Sentence: 'Many people think that the ancient city disappeared because of drought.',
+      c1Sentence: 'The ancient city is widely believed to have disappeared as a result of prolonged drought.',
+      pitfall: 'Nhầm lẫn mốc thời gian ở động từ nguyên mẫu: nếu sự việc đã xảy ra TRƯỚC thời điểm nói, bắt buộc dùng Perfect Infinitive ("to have + V3", KHÔNG dùng "to + V").',
+      drills: [
+        {
+          q: 'The policy is widely believed _____ a decisive impact on rural employment last decade.',
+          options: ['to have', 'to have had', 'having had', 'that it had'],
+          answer: 1,
+          explain: 'Có mốc quá khứ "last decade" (xảy ra trước hiện tại) → Perfect Infinitive: to have had.'
+        },
+        {
+          q: '_____ that consistent exposure to varied accents accelerates listening fluency.',
+          options: ['It widely acknowledges', 'It is widely acknowledged', 'There is acknowledged', 'That is acknowledged'],
+          answer: 1,
+          explain: 'Cấu trúc bị động khách quan chuẩn C1: It is widely acknowledged that...'
+        },
+        {
+          q: 'The software glitch is estimated _____ thousands of commuters during yesterday\'s rush hour.',
+          options: ['to delay', 'to be delaying', 'to have delayed', 'delaying'],
+          answer: 2,
+          explain: 'Sự cố xảy ra trong quá khứ ("yesterday\'s rush hour") → to have delayed.'
+        }
+      ]
+    },
+    {
+      id: 'gm-double-comp',
+      priority: 'Giáo trình Destination C1 & C2',
+      level: 'C1',
+      title: 'So sánh kép & Giả định hiện tại (It\'s high time / Would rather)',
+      subtitle: 'The more..., the more... · It\'s high time + V2 · Would rather + S + V2',
+      summary: 'Các cấu trúc ăn điểm tuyệt đối trong Cambridge C1 Key Word Transformations (Part 4) và bài Nói tranh biện (Destination C1 & C2 — Unreal Past & Comparatives).',
+      textbookRef: 'Destination C1 & C2 (Unreal Past) · Advanced Grammar in Use (M. Hewings)',
+      referenceUrl: 'https://learnenglish.britishcouncil.org/free-resources/grammar/c1',
+      formulas: [
+        'So sánh kép: The + comparative (+ S + V), the + comparative (+ S + V)',
+        'Đã đến lúc phải làm gì: It is (high / about) time + S + V2/V-ed (dù nói về hiện tại!)',
+        'Muốn ai đó làm gì (Unreal Past): S1 + would rather + S2 + V2 (hiện tại) | had + V3 (quá khứ)'
+      ],
+      b1Sentence: 'If you practice speaking more often, you will hesitate much less.',
+      c1Sentence: 'The more consistently you practice speaking, the less likely you are to hesitate under pressure.',
+      pitfall: 'Sau "It\'s high time + S..." và "I\'d rather you..." luôn lùi thì về Quá khứ đơn (V2) dù đang nói về hiện tại/tương lai! (Sai: "It\'s high time we start" → Đúng: "It\'s high time we started").',
+      drills: [
+        {
+          q: 'It is high time the organization _____ clear guidelines on ethical AI usage.',
+          options: ['establishes', 'established', 'will establish', 'has established'],
+          answer: 1,
+          explain: 'Cấu trúc Unreal Past: It\'s high time + S + V2/V-ed → established.'
+        },
+        {
+          q: 'I\'d rather you _____ me honest, constructive feedback than polite praise.',
+          options: ['give', 'gave', 'will give', 'giving'],
+          answer: 1,
+          explain: 'Khi có hai chủ ngữ khác nhau (I\'d rather YOU...) nói về hiện tại/tương lai → dùng V2 (gave).'
+        },
+        {
+          q: 'The more nuanced your vocabulary becomes, _____ you can express complex arguments.',
+          options: ['more effortlessly', 'the effortlessly', 'the more effortlessly', 'most effortlessly'],
+          answer: 2,
+          explain: 'Cấu trúc so sánh kép bắt buộc có "the" ở cả hai vế → the more effortlessly.'
+        }
+      ]
     }
   ],
 
@@ -923,5 +1096,172 @@ window.C1_DATA = {
       prompt: 'Think of a past decision that shaped where you are today. Use at least one Mixed Conditional to reflect on it.',
       markers: ['To be perfectly honest', 'Had I known...', 'a watershed moment', 'the silver lining']
     }
+  ],
+
+  /* ------------------------------------------------------------------------
+     Cambridge C1 Advanced (CAE) — Reading & Use of English (Parts 2, 3, 4)
+     Định dạng đề thi chuẩn Cambridge C1 (Destination C1/C2 & Hewings)
+     ------------------------------------------------------------------------ */
+  caeUseOfEnglish: {
+    openCloze: [
+      {
+        id: 'oc-1',
+        sentence: 'Not _____ did the seminar clarify mixed conditionals, but it also boosted everyone\'s writing speed.',
+        answers: ['only'],
+        explain: 'Cấu trúc đảo ngữ nhấn mạnh cố định: Not ONLY + Aux + S + V, but ... also...'
+      },
+      {
+        id: 'oc-2',
+        sentence: 'Hardly had the keynote speaker stepped onto the stage _____ the microphone failed.',
+        answers: ['when'],
+        explain: 'Cặp đảo ngữ thời gian chuẩn CAE: Hardly / Scarcely ... WHEN (No sooner ... THAN).'
+      },
+      {
+        id: 'oc-3',
+        sentence: 'It is high _____ the department updated its outdated onboarding curriculum.',
+        answers: ['time'],
+        explain: 'Cấu trúc Unreal Past: It is high / about TIME + S + V2.'
+      },
+      {
+        id: 'oc-4',
+        sentence: '_____ the initial skepticism surrounding online coaching, completion rates exceeded ninety percent.',
+        answers: ['despite'],
+        explain: 'Theo sau là cụm danh từ ("the initial skepticism") → giới từ nhượng bộ DESPITE.'
+      },
+      {
+        id: 'oc-5',
+        sentence: 'Remote work offers remarkable autonomy; _____, it requires strong personal discipline to avoid burnout.',
+        answers: ['however', 'nevertheless', 'nonetheless'],
+        explain: 'Trạng từ liên kết tương phản đặt sau dấu chấm phẩy và trước dấu phẩy: HOWEVER / NEVERTHELESS.'
+      },
+      {
+        id: 'oc-6',
+        sentence: 'The researchers called for strict ethical standards _____ order to mitigate potential algorithmic bias.',
+        answers: ['in'],
+        explain: 'Cụm chỉ mục đích trang trọng chuẩn học thuật: IN order to + V.'
+      }
+    ],
+    wordFormation: [
+      {
+        id: 'wf-1',
+        root: 'PRECEDE',
+        sentence: 'Digital learning platforms have grown at an _____ pace over the past five years.',
+        answers: ['unprecedented'],
+        explain: 'Tiền tố phủ định un- + tính từ phân từ: UNPRECEDENTED (chưa từng có tiền lệ).'
+      },
+      {
+        id: 'wf-2',
+        root: 'SUSTAIN',
+        sentence: 'Long-term _____ depends on building realistic daily habits rather than short bursts of willpower.',
+        answers: ['sustainability'],
+        explain: 'Sau tính từ "Long-term" cần danh từ trừu tượng → SUSTAINABILITY (tính bền vững).'
+      },
+      {
+        id: 'wf-3',
+        root: 'RELY',
+        sentence: 'Public transit in that district used to be notoriously _____, causing frequent commuter delays.',
+        answers: ['unreliable'],
+        explain: 'Ngữ cảnh tiêu cực ("notoriously", "delays") → tính từ phủ định UNRELIABLE (không đáng tin cậy).'
+      },
+      {
+        id: 'wf-4',
+        root: 'PERCEIVE',
+        sentence: 'Shadowing native podcasts gradually reshapes learners\' _____ of natural rhythm and connected speech.',
+        answers: ['perception'],
+        explain: 'Sau sở hữu cách "learners\'" cần danh từ → PERCEPTION (sự cảm nhận / nhận thức).'
+      },
+      {
+        id: 'wf-5',
+        root: 'CONTROVERSY',
+        sentence: 'The proposal to replace written exams with AI oral assessments proved highly _____.',
+        answers: ['controversial'],
+        explain: 'Sau động từ nối "proved" + trạng từ "highly" cần tính từ → CONTROVERSIAL (gây tranh cãi).'
+      },
+      {
+        id: 'wf-6',
+        root: 'SIGNIFY',
+        sentence: 'At first glance the error seemed _____, yet repeating it undermined the clarity of the report.',
+        answers: ['insignificant'],
+        explain: 'Ngữ cảnh tương phản với "yet" → tính từ phủ định INSIGNIFICANT (không đáng kể).'
+      },
+      {
+        id: 'wf-7',
+        root: 'COMPARE',
+        sentence: 'Practicing with real human studio audio provides _____ clarity compared to robotic synthesizers.',
+        answers: ['incomparable'],
+        explain: 'Cần tính từ C1 mang nghĩa "vượt trội không gì sánh bằng" → INCOMPARABLE.'
+      },
+      {
+        id: 'wf-8',
+        root: 'CONSEQUENCE',
+        sentence: 'She skipped weekly error reviews; _____, the same collocation mistakes kept reappearing.',
+        answers: ['consequently'],
+        explain: 'Đứng sau dấu chấm phẩy và trước dấu phẩy để chỉ kết quả → trạng từ CONSEQUENTLY.'
+      }
+    ],
+    keyWordTransformations: [
+      {
+        id: 'kwt-1',
+        original: 'He only realized the importance of collocations after taking the diagnostic test.',
+        keyWord: 'UNTIL',
+        prefix: 'Not ',
+        suffix: ' realize the importance of collocations.',
+        answers: ['until he took the diagnostic test did he', 'until he had taken the diagnostic test did he'],
+        explain: 'Đảo ngữ với "Not until": Not until + [mệnh đề phụ] + did + S + V(nguyên mẫu).'
+      },
+      {
+        id: 'kwt-2',
+        original: 'I didn\'t practice speaking regularly last year, so I feel nervous in meetings today.',
+        keyWord: 'HAD',
+        prefix: '',
+        suffix: ' regularly last year, I wouldn\'t feel nervous in meetings today.',
+        answers: ['had i practiced speaking', 'had i practised speaking'],
+        explain: 'Đảo ngữ Câu điều kiện hỗn hợp bỏ "If": Had I practiced speaking...'
+      },
+      {
+        id: 'kwt-3',
+        original: 'The committee insists that every applicant must submit an original portfolio.',
+        keyWord: 'IMPERATIVE',
+        prefix: 'It ',
+        suffix: ' an original portfolio.',
+        answers: ['is imperative that every applicant submit'],
+        explain: 'Thức giả định (Subjunctive): It is imperative that + S + V(nguyên mẫu: submit).'
+      },
+      {
+        id: 'kwt-4',
+        original: 'People widely believe that the ancient harbor collapsed after a severe earthquake.',
+        keyWord: 'BELIEVED',
+        prefix: 'The ancient harbor ',
+        suffix: ' after a severe earthquake.',
+        answers: ['is widely believed to have collapsed', 'is believed to have collapsed'],
+        explain: 'Bị động khách quan về sự việc trong quá khứ: is (widely) believed to have + V3.'
+      },
+      {
+        id: 'kwt-5',
+        original: 'You really ought to stop putting off your evening writing practice.',
+        keyWord: 'HIGH',
+        prefix: 'It ',
+        suffix: ' putting off your evening writing practice.',
+        answers: ['is high time you stopped', '\'s high time you stopped'],
+        explain: 'Unreal Past: It is high time + S + V2 (stopped).'
+      },
+      {
+        id: 'kwt-6',
+        original: 'The mentor\'s constructive feedback immediately boosted the whole team\'s morale.',
+        keyWord: 'WAS',
+        prefix: 'It ',
+        suffix: ' immediately boosted the whole team\'s morale.',
+        answers: ['was the mentor\'s constructive feedback that'],
+        explain: 'Câu chẻ nhấn mạnh (It-cleft): It was [thành phần nhấn] + that + V.'
+      }
+    ]
+  },
+
+  standardResources: [
+    { level: 'A0–A2', title: 'British Council LearnEnglish — A1–A2 Grammar (Miễn phí)', url: 'https://learnenglish.britishcouncil.org/free-resources/grammar/a1-a2', note: 'Chuẩn quy trình Test → Teach → Test' },
+    { level: 'B1–B2', title: 'British Council LearnEnglish — B1–B2 Grammar (Miễn phí)', url: 'https://learnenglish.britishcouncil.org/free-resources/grammar/b1-b2', note: 'Song hành với English Grammar in Use (Murphy)' },
+    { level: 'C1', title: 'British Council LearnEnglish — C1 Grammar (Miễn phí)', url: 'https://learnenglish.britishcouncil.org/free-resources/grammar/c1', note: 'Inversion, Cleft Sentences & Advanced Nuance' },
+    { level: 'A0–C1', title: 'British Council — English Grammar Reference', url: 'https://learnenglish.britishcouncil.org/free-resources/grammar/english-grammar-reference', note: 'Tra cứu chuẩn 7 nhóm từ loại học thuật' }
   ]
 };
+

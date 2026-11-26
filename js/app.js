@@ -64,7 +64,10 @@
   let activeTab = 'roadmap';
   let foundationStep = 'f-a0'; // 'f-a0' | 'f-a1' | 'f-a2' | 'f-b1' | 'checkpoint'
   let foundationDrillAnswers = {};
+  let foundationReadingAnswers = {};
   let checkpointAnswers = {};
+  let caePart = 'openCloze'; // 'openCloze' | 'wordFormation' | 'keyWordTransformations'
+  let caeResults = {};
   let selectedDayOfWeek = new Date().getDay();
   let colCategory = 'all';
   let colDueOnly = false;
@@ -363,8 +366,11 @@
     const stage = document.getElementById('foundation-stage');
     const isModDone = state.completedFoundation.includes(mod.id);
 
+    const rdChosen = foundationReadingAnswers[mod.id];
+    const rdAnswered = typeof rdChosen === 'number';
+
     stage.innerHTML = `
-      <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:14px;">
+      <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:8px;">
         <div>
           <span class="badge badge-brand">${esc(mod.badge)}</span>
           ${isModDone ? '<span class="badge badge-success" style="margin-left:6px;">✓ Đã hoàn thành chặng</span>' : ''}
@@ -377,9 +383,31 @@
       </div>
 
       ${
+        mod.textbookRef
+          ? `
+        <div class="textbook-bar">
+          <div><strong>📚 Đối chiếu giáo trình chuẩn:</strong> ${esc(mod.textbookRef)}</div>
+          ${
+            mod.referenceLinks && mod.referenceLinks.length
+              ? `<div class="textbook-links">
+                  ${mod.referenceLinks
+                    .map(
+                      (lk) =>
+                        `<a class="textbook-link" href="${esc(lk.url)}" target="_blank" rel="noopener noreferrer">↗ ${esc(lk.label)}</a>`
+                    )
+                    .join('')}
+                </div>`
+              : ''
+          }
+        </div>
+      `
+          : ''
+      }
+
+      ${
         mod.minimalPairs && mod.minimalPairs.length
           ? `
-        <h4 style="font-size:1rem;margin:18px 0 6px;">1. Luyện phân biệt cặp âm IPA dễ nhầm (Bấm vào từng từ để nghe MP3 người thật)</h4>
+        <h4 style="font-size:1rem;margin:18px 0 6px;">Luyện phân biệt cặp âm IPA dễ nhầm (Bấm vào từng từ để nghe MP3 người thật)</h4>
         <div class="ipa-grid">
           ${mod.minimalPairs
             .map(
@@ -408,7 +436,7 @@
           : ''
       }
 
-      <h4 style="font-size:1rem;margin:18px 0 6px;">${mod.minimalPairs ? '2.' : '1.'} Ngữ pháp nền tảng trình độ ${esc(mod.level)}</h4>
+      <h4 style="font-size:1rem;margin:18px 0 6px;">Ngữ pháp chuẩn giáo trình trình độ ${esc(mod.level)}</h4>
       <div class="f-grammar-list">
         ${mod.grammarPoints
           .map(
@@ -429,7 +457,74 @@
           .join('')}
       </div>
 
-      <h4 style="font-size:1rem;margin:18px 0 6px;">${mod.minimalPairs ? '3.' : '2.'} Mẫu câu &amp; Từ vựng cốt lõi ${esc(mod.level)} (Gửi thẳng sang Anki SM-2)</h4>
+      ${
+        mod.irregularVerbs && mod.irregularVerbs.length
+          ? `
+        <h4 style="font-size:1rem;margin:18px 0 6px;">Bảng 20 Động từ Bất quy tắc Cốt lõi (A2 → C1 · Bấm loa nghe V1–V2–V3)</h4>
+        <div class="irregular-table-wrap">
+          <table class="irregular-table">
+            <thead>
+              <tr><th>V1 (Nguyên mẫu)</th><th>V2 (Quá khứ)</th><th>V3 (Phân từ)</th><th>Nghĩa tiếng Việt</th><th>Nghe</th></tr>
+            </thead>
+            <tbody>
+              ${mod.irregularVerbs
+                .map(
+                  (iv) => `
+                <tr>
+                  <td><code>${esc(iv.v1)}</code></td>
+                  <td><code>${esc(iv.v2)}</code></td>
+                  <td><code>${esc(iv.v3)}</code></td>
+                  <td>${esc(iv.vi)}</td>
+                  <td><button type="button" class="btn btn-secondary btn-sm f-speak-word" data-word="${esc(`${iv.v1}, ${iv.v2}, ${iv.v3}`)}">🔊</button></td>
+                </tr>
+              `
+                )
+                .join('')}
+            </tbody>
+          </table>
+        </div>
+      `
+          : ''
+      }
+
+      ${
+        mod.reading
+          ? `
+        <div class="reading-box">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;">
+            <strong style="font-size:0.96rem;">📖 ${esc(mod.reading.title)}</strong>
+            <button type="button" class="btn btn-secondary btn-sm f-speak-word" data-word="${esc(mod.reading.text)}">🔊 Nghe đọc đoạn văn</button>
+          </div>
+          <p class="reading-text">${esc(mod.reading.text)}</p>
+          <div style="font-weight:600;font-size:0.9rem;margin-bottom:8px;">Câu hỏi đọc hiểu: ${esc(mod.reading.question)}</div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px;">
+            ${mod.reading.options
+              .map((opt, oi) => {
+                let cls = 'quiz-option';
+                if (rdAnswered) {
+                  if (oi === mod.reading.answer) cls += ' correct';
+                  else if (oi === rdChosen) cls += ' wrong';
+                }
+                return `<button type="button" class="${cls}" style="padding:9px 12px;font-size:0.86rem;" data-frd-o="${oi}" ${rdAnswered ? 'disabled' : ''}>
+                  <span class="opt-key">${String.fromCharCode(65 + oi)}</span>
+                  <span>${esc(opt)}</span>
+                </button>`;
+              })
+              .join('')}
+          </div>
+          ${
+            rdAnswered
+              ? `<div class="quiz-feedback ${rdChosen === mod.reading.answer ? 'ok' : 'err'}">
+                  <strong>${rdChosen === mod.reading.answer ? '✓ Đọc hiểu chính xác!' : '✕ Chưa đúng.'}</strong> ${esc(mod.reading.explain)}
+                </div>`
+              : ''
+          }
+        </div>
+      `
+          : ''
+      }
+
+      <h4 style="font-size:1rem;margin:18px 0 6px;">Mẫu câu &amp; Từ vựng cốt lõi ${esc(mod.level)} (Gửi thẳng sang Anki SM-2)</h4>
       <div class="phrase-grid">
         ${mod.phrases
           .map(
@@ -454,7 +549,7 @@
       </div>
 
       <div style="margin-top:22px;padding-top:18px;border-top:1px solid var(--border-subtle);">
-        <h4 style="font-size:1rem;margin:0 0 12px;">${mod.minimalPairs ? '4.' : '3.'} Bài tập kiểm tra nhanh chặng ${esc(mod.level)} (${mod.drills.length} câu)</h4>
+        <h4 style="font-size:1rem;margin:0 0 12px;">Bài tập kiểm tra nhanh chặng ${esc(mod.level)} (${mod.drills.length} câu)</h4>
         <div style="display:flex;flex-direction:column;gap:16px;">
           ${mod.drills
             .map((dr, qi) => {
@@ -496,6 +591,16 @@
 
     stage.querySelectorAll('.f-speak-word').forEach((btn) => {
       btn.addEventListener('click', () => playSpeech(btn.dataset.word, { btn }));
+    });
+
+    stage.querySelectorAll('[data-frd-o]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        if (typeof foundationReadingAnswers[mod.id] === 'number') return;
+        const oi = Number(btn.dataset.frdO);
+        foundationReadingAnswers[mod.id] = oi;
+        if (oi === mod.reading.answer) addXp(12, `Đọc hiểu ${mod.level} chính xác!`);
+        renderFoundation();
+      });
     });
 
     stage.querySelectorAll('.f-add-sm2').forEach((btn) => {
@@ -828,6 +933,21 @@
         renderRoadmap();
       });
     });
+
+    const resGrid = document.getElementById('standard-resources-grid');
+    if (resGrid && DATA.standardResources) {
+      resGrid.innerHTML = DATA.standardResources
+        .map(
+          (r) => `
+        <a class="resource-card" href="${esc(r.url)}" target="_blank" rel="noopener noreferrer">
+          <span class="badge badge-brand" style="width:fit-content;">${esc(r.level)}</span>
+          <strong style="font-size:0.88rem;color:var(--text-primary);">${esc(r.title)} ↗</strong>
+          <span style="font-size:0.78rem;color:var(--text-secondary);">${esc(r.note)}</span>
+        </a>
+      `
+        )
+        .join('');
+    }
   }
 
   function updateSessionClockUI() {
@@ -1125,6 +1245,13 @@
       </div>
       <h2 style="font-family:var(--font-serif);font-size:1.65rem;margin:0 0 6px;">${esc(mod.title)}</h2>
       <p style="margin:0;color:var(--text-secondary);font-size:0.92rem;">${esc(mod.summary)}</p>
+
+      <div class="textbook-bar">
+        <div><strong>📚 Giáo trình đối chiếu:</strong> ${esc(mod.textbookRef || 'Advanced Grammar in Use (M. Hewings) · Destination C1 & C2 · Cambridge C1 Advanced')}</div>
+        <div class="textbook-links">
+          <a class="textbook-link" href="${esc(mod.referenceUrl || 'https://learnenglish.britishcouncil.org/free-resources/grammar/c1')}" target="_blank" rel="noopener noreferrer">↗ British Council C1 Grammar</a>
+        </div>
+      </div>
 
       <div class="formula-box">
         ${mod.formulas.map((f) => `<div>${esc(f)}</div>`).join('')}
@@ -1564,7 +1691,137 @@ Hãy nhận xét ngắn gọn bằng tiếng Việt theo 4 mục rõ ràng:
      ------------------------------------------------------------------------ */
   function renderReviewTab() {
     renderErrorLog();
+    renderCaeLab();
     if (!quizState.questions.length) startQuiz(quizState.mode);
+  }
+
+  function normalizeCaeAnswer(str) {
+    return String(str || '')
+      .trim()
+      .toLowerCase()
+      .replace(/[’‘]/g, "'")
+      .replace(/\s+/g, ' ');
+  }
+
+  function renderCaeLab() {
+    const host = document.getElementById('cae-lab-stage');
+    if (!host || !DATA.caeUseOfEnglish) return;
+
+    document.querySelectorAll('[data-caepart]').forEach((b) =>
+      b.classList.toggle('active', b.dataset.caepart === caePart)
+    );
+
+    const list = DATA.caeUseOfEnglish[caePart] || [];
+
+    host.innerHTML = list
+      .map((item, idx) => {
+        const res = caeResults[item.id];
+        if (caePart === 'openCloze') {
+          return `
+            <div class="cae-item">
+              <div style="font-weight:600;font-size:0.93rem;">Câu ${idx + 1}: ${esc(item.sentence)}</div>
+              <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                <input type="text" class="input cae-input" data-cae-id="${item.id}" style="max-width:240px;" placeholder="Điền đúng 1 từ..." value="${esc(res ? res.user : '')}" />
+                <button type="button" class="btn btn-primary btn-sm cae-check-btn" data-cae-id="${item.id}">Kiểm tra</button>
+              </div>
+              ${
+                res
+                  ? `<div class="quiz-feedback ${res.ok ? 'ok' : 'err'}" style="margin-top:2px;">
+                      <strong>${res.ok ? '✓ Chính xác!' : `✕ Chưa đúng — Đáp án chuẩn: "${esc(item.answers[0])}"`}</strong> ${esc(item.explain)}
+                    </div>`
+                  : ''
+              }
+            </div>
+          `;
+        }
+
+        if (caePart === 'wordFormation') {
+          return `
+            <div class="cae-item">
+              <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;">
+                <div style="font-weight:600;font-size:0.93rem;">Câu ${idx + 1}: ${esc(item.sentence)}</div>
+                <span class="cae-keyword">${esc(item.root)}</span>
+              </div>
+              <div style="display:flex;gap:8px;flex-wrap:wrap;">
+                <input type="text" class="input cae-input" data-cae-id="${item.id}" style="max-width:260px;" placeholder="Biến đổi từ gốc ${esc(item.root)}..." value="${esc(res ? res.user : '')}" />
+                <button type="button" class="btn btn-primary btn-sm cae-check-btn" data-cae-id="${item.id}">Kiểm tra</button>
+              </div>
+              ${
+                res
+                  ? `<div class="quiz-feedback ${res.ok ? 'ok' : 'err'}" style="margin-top:2px;">
+                      <strong>${res.ok ? '✓ Chính xác!' : `✕ Chưa đúng — Đáp án chuẩn: "${esc(item.answers[0])}"`}</strong> ${esc(item.explain)}
+                    </div>`
+                  : ''
+              }
+            </div>
+          `;
+        }
+
+        // Part 4: Key Word Transformations
+        return `
+          <div class="cae-item">
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;">
+              <div style="font-size:0.92rem;"><strong>Câu ${idx + 1} (Gốc):</strong> ${esc(item.original)}</div>
+              <span class="cae-keyword">KEY: ${esc(item.keyWord)}</span>
+            </div>
+            <div style="font-family:var(--font-serif);font-size:1rem;color:var(--text-primary);">
+              ${esc(item.prefix)}<span style="border-bottom:2px dashed var(--brand);padding:0 10px;color:var(--brand-text);font-family:var(--font-sans);font-size:0.85rem;">[ 3–6 từ chứa "${esc(item.keyWord)}" ]</span>${esc(item.suffix)}
+            </div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap;">
+              <input type="text" class="input cae-input" data-cae-id="${item.id}" style="flex:1;min-width:240px;" placeholder="Nhập cụm 3–6 từ điền vào chỗ trống..." value="${esc(res ? res.user : '')}" />
+              <button type="button" class="btn btn-primary btn-sm cae-check-btn" data-cae-id="${item.id}">Chấm điểm</button>
+            </div>
+            ${
+              res
+                ? `<div class="quiz-feedback ${res.ok ? 'ok' : 'err'}" style="margin-top:2px;">
+                    <strong>${res.ok ? '✓ Đạt chuẩn 2/2 điểm CAE!' : `✕ Chưa khớp — Đáp án mẫu: "${esc(item.answers[0])}"`}</strong> ${esc(item.explain)}
+                  </div>`
+                : ''
+            }
+          </div>
+        `;
+      })
+      .join('');
+
+    function gradeItem(id) {
+      const item = list.find((x) => x.id === id);
+      const inp = host.querySelector(`.cae-input[data-cae-id="${id}"]`);
+      if (!item || !inp) return;
+      const userVal = inp.value.trim();
+      if (!userVal) {
+        showToast('Hãy nhập câu trả lời trước khi chấm điểm.');
+        return;
+      }
+      const normUser = normalizeCaeAnswer(userVal);
+      const ok = item.answers.some((ans) => normalizeCaeAnswer(ans) === normUser);
+      caeResults[id] = { user: userVal, ok };
+
+      if (ok) {
+        addXp(15, 'Chính xác bài thi Cambridge C1 Use of English!');
+      } else {
+        addErrorLogItem({
+          category: 'CAE Use of English',
+          wrong: `${item.original || item.sentence} → Điền sai: "${userVal}"`,
+          correct: `Đáp án chuẩn CAE: "${item.answers[0]}"`,
+          note: item.explain
+        });
+        renderErrorLog();
+      }
+      renderCaeLab();
+    }
+
+    host.querySelectorAll('.cae-check-btn').forEach((btn) => {
+      btn.addEventListener('click', () => gradeItem(btn.dataset.caeId));
+    });
+
+    host.querySelectorAll('.cae-input').forEach((inp) => {
+      inp.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          gradeItem(inp.dataset.caeId);
+        }
+      });
+    });
   }
 
   function renderErrorLog() {
@@ -2124,6 +2381,13 @@ Hãy nhận xét ngắn gọn bằng tiếng Việt theo 4 mục rõ ràng:
     // Review & Error Log (Tab 6)
     document.querySelectorAll('[data-qmode]').forEach((btn) => {
       btn.addEventListener('click', () => startQuiz(btn.dataset.qmode));
+    });
+
+    document.querySelectorAll('[data-caepart]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        caePart = btn.dataset.caepart;
+        renderCaeLab();
+      });
     });
 
     document.getElementById('manual-error-form').addEventListener('submit', (e) => {

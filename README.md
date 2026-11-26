@@ -13,18 +13,18 @@ Website học tiếng Anh cá nhân hóa được thiết kế sát theo **Lộ 
 1. **Lộ trình & Phiên học Hôm nay (`08:00–08:45` & `20:00–21:00`):**
    - Hiển thị 3 điểm nghẽn chẩn đoán, đồng hồ phiên học tập trung (`15p / 20p / 30p / 45p / 60p`), checklist Thứ 2 → Chủ Nhật theo nguyên tắc *Input trước – Output sau*.
    - Bản đồ tiến độ 3 giai đoạn / 24 tuần + nút **Xuất lịch `.ics`** để nhập thẳng vào **Google Calendar**.
-2. **Khóa Ôn Tập Nền Tảng A0 → B1 (4 Chặng + Tổng duyệt 10 câu):**
-   - **A0:** Luyện phân biệt cặp âm IPA dễ nhầm (*Minimal Pairs*: `sheep/ship`, `bad/bed`, `think/sink`, đuôi `-ed` `/t/ /d/ /ɪd/`), âm cuối và trật tự câu cơ bản.
-   - **A1:** Hiện tại đơn vs Tiếp diễn, danh từ đếm được/không đếm được, giới từ `in/on/at`, động từ khuyết thiếu cơ bản.
-   - **A2:** Quá khứ đơn, tương lai (`will` vs `be going to`), so sánh hơn/nhất, câu điều kiện Loại 0 & 1.
-   - **B1:** Hiện tại hoàn thành vs Quá khứ đơn, bị động cơ bản, mệnh đề quan hệ, Gerund vs To-Infinitive, điều kiện Loại 2 + **Bài kiểm tra Tốt nghiệp A0–B1 (10 câu)**.
-   - Hỗ trợ nghe phát âm từng từ/ví dụ và gửi thẳng bất kỳ cụm từ nào sang bộ ôn **Anki SM-2** chỉ với 1 bấm.
-3. **Collocations SM-2 (Chuẩn Anki) & Tra Từ Trực Tuyến:**
-   - 42 cụm *Verb + Noun Collocations*, *Academic C1*, *Discourse Markers* và *Sắc thái/Idioms C1* kèm cảnh báo **bẫy dịch Việt–Anh**.
+2. **Khóa Ôn Tập Nền Tảng A0 → B1 chuẩn giáo trình (4 Chặng + Tổng duyệt 12 câu):**
+   - Đối chiếu trực tiếp **Essential & English Grammar in Use (Raymond Murphy)**, **Oxford 3000**, **Cambridge A2 Key / B1 Preliminary** và gắn liên kết mở **British Council LearnEnglish**.
+   - **A0:** Cặp âm IPA dễ nhầm (*Minimal Pairs*), `to be`, đại từ nhân xưng/sở hữu, `there is/are`, bài đọc ngắn A0 và 5 câu test.
+   - **A1:** Hiện tại đơn vs Tiếp diễn, **Mạo từ `a/an/the/Ø`**, **Phân biệt `DO` vs `MAKE`**, lượng từ, giới từ `in/on/at`, bài đọc A1 và 5 câu test.
+   - **A2:** Quá khứ đơn vs **Quá khứ tiếp diễn**, **`used to`**, tương lai, so sánh, `too/enough`, **Bảng 20 động từ bất quy tắc cốt lõi có âm thanh V1–V2–V3**, bài đọc chuẩn KET và 5 câu test.
+   - **B1:** Hiện tại hoàn thành, **Quá khứ hoàn thành (`had + V3`)**, bị động, **Câu hỏi gián tiếp lịch sự**, mệnh đề quan hệ, Gerund vs `to V`, bài đọc chuẩn PET + **Tổng duyệt tốt nghiệp A0–B1 (12 câu)**.
+3. **Collocations SM-2 (Chuẩn Anki — 54 cụm từ) & Tra Từ Trực Tuyến:**
+   - 54 cụm từ chọn lọc theo **English Collocations in Use (Intermediate & Advanced)** & **Oxford 5000** (*Verb + Noun*, *Academic C1*, *Discourse Markers*, *Sắc thái/Idioms C1*) kèm cảnh báo **bẫy dịch Việt–Anh**.
    - Thuật toán **SM-2 Spaced Repetition** tính ngày ôn tối ưu (`Quên / Khó / Tốt / Rất dễ`).
    - Tra từ trực tuyến kết hợp **Free Dictionary API + Datamuse API** để lấy MP3 người thật, Collocations, đồng nghĩa C1 và lưu vào bộ thẻ chỉ với 1 bấm.
-4. **Ngữ pháp C1 (Điểm nghẽn #2):**
-   - 6 chuyên đề trọng tâm: *Mixed Conditionals*, *Mandative Subjunctive*, *Negative Inversion*, *Cleft Sentences*, *Past Modals & Reporting Verbs*, *Nominalization*.
+4. **Ngữ pháp C1 chuẩn giáo trình (8 chuyên đề — Hewings & Destination C1/C2):**
+   - *Mixed Conditionals*, *Mandative Subjunctive*, *Negative Inversion*, *Cleft Sentences*, *Past Modals & Reporting Verbs*, *Nominalization*, **Bị động khách quan (`is believed to have V3`)** và **So sánh kép / Unreal Past (`It's high time + V2`, `would rather + V2`)**.
    - So sánh trực quan **B1 → C1** có âm thanh và bài tập tự động lưu câu sai vào *Error Log*.
 5. **Xưởng Micro-Writing (20:00) & Paraphrasing C1:**
    - Bộ kiểm tra tiêu chí C1 trực tiếp khi gõ (độ dài, số câu, collocations, cấu trúc C1), lưu **Nhật ký Viết**.
@@ -32,8 +32,8 @@ Website học tiếng Anh cá nhân hóa được thiết kế sát theo **Lộ 
 6. **Nghe Sâu Đa Giọng (US / UK / AU) & Phòng Nói 3-2-1 / Shadowing:**
    - Nghe điền từ & chép chính tả đa giọng đọc + khung **Cornell Notes**.
    - **Chấm phát âm Shadowing** theo thời gian thực (`Web Speech Recognition`), **Ghi âm so sánh** (`MediaRecorder`) và đồng hồ **3-2-1 Speaking** kèm cụm *Discourse Markers C1*.
-7. **Sổ Lỗi Cá Nhân (Error Log) & Kiểm Tra Thứ Bảy:**
-   - Tự động thu thập lỗi từ các bài luyện tập và cho phép ghi lỗi thủ công để rà soát hàng tuần.
+7. **Sổ Lỗi Cá Nhân (Error Log) & Phòng Luyện Cambridge C1 Advanced (CAE) Use of English:**
+   - Luyện đúng 3 dạng đề phân loại B2 vs C1 của Cambridge CAE: **Part 2 Open Cloze**, **Part 3 Word Formation**, và **Part 4 Key Word Transformation** (chấm tự động & lưu lỗi sai vào *Error Log*).
 
 ## Cấu trúc mã nguồn
 
