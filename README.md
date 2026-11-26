@@ -1,47 +1,47 @@
-# LingoCraft — Website Học Tiếng Anh Chủ Động
+# LingoCraft C1 Studio — Hệ Thống Huấn Luyện Tiếng Anh B1+ → C1 (6 Tháng)
 
-Website học tiếng Anh tương tác dành cho người Việt, được xây dựng hoàn toàn bằng HTML5, Vanilla CSS và JavaScript thuần (không cần cài đặt thư viện hay bước build), lưu tiến độ tự động bằng `localStorage` và sẵn sàng triển khai miễn phí trên **GitHub Pages**.
+Website học tiếng Anh cá nhân hóa được thiết kế sát theo **Lộ trình 24 tuần (6 tháng) từ B1 vững lên chuẩn CEFR C1**, đánh thẳng vào 3 điểm nghẽn Output: **Verb + Noun Collocations**, **Ngữ pháp Giả định & Nhấn mạnh (Mixed Conditionals / Subjunctive / Inversion)**, và **Phản xạ Viết (Micro-Writing 20:00)** — tích hợp bộ phát âm tự nhiên 3 lớp 100% miễn phí.
 
-## Tính năng nổi bật
+## Hệ thống phát âm tự nhiên 3 lớp (100% Miễn phí — Không cần máy chủ)
 
-- **Flashcards Từ Vựng (60+ từ chọn lọc theo 6 chủ đề)**:
-  - Đầy đủ phiên âm **IPA**, từ loại, trình độ CEFR (`A2`–`B2`), nghĩa tiếng Việt, câu ví dụ thực tế và mẹo dùng từ.
-  - Phát âm trực tiếp bằng **Web Speech API** với tùy chọn giọng **Anh - Mỹ (US)** / **Anh - Anh (UK)** và tốc độ chậm **0.7x**.
-  - Tự đánh giá mức độ nhớ (*Chưa nhớ / Tạm nhớ / Đã thuộc*), lọc từ chưa thuộc và hỗ trợ phím tắt (`Space`, `S`, `←`, `→`, `1`, `2`, `3`).
-- **Sổ Từ Vựng & Từ Cá Nhân**:
-  - Tìm kiếm nhanh theo từ tiếng Anh, nghĩa tiếng Việt hoặc ví dụ.
-  - Tự thêm từ vựng mới của riêng bạn vào sổ tay và bộ Flashcard.
-- **Luyện Nghe & Chép Chính Tả (Listening Studio)**:
-  - Hai chế độ: **Nghe & Điền từ** và **Chép chính tả cả câu** kèm chấm điểm chi tiết từng từ và ghi chú phát âm.
-- **Ngữ Pháp Cốt Lõi (6 chuyên đề trọng tâm)**:
-  - Công thức súc tích, ví dụ có âm thanh, mục **"Lỗi người Việt hay gặp"** và bài kiểm tra nhanh kèm giải thích chi tiết.
-- **Hội Thoại Thực Tế (5 tình huống đời thực)**:
-  - Gọi cà phê, phỏng vấn xin việc, check-in khách sạn, họp Daily Standup, hỏi đường — hỗ trợ bấm nghe từng câu hoặc **Nghe cả đoạn** và bật/tắt dịch tiếng Việt.
-- **Kiểm Tra Trắc Nghiệm (4 chế độ)**:
-  - Anh → Việt, Việt → Anh, Nghe & Chọn từ, Trắc nghiệm Ngữ pháp kèm chấm điểm, chuỗi trả lời đúng và bảng ôn lại các câu sai.
-- **Giao diện Sáng/Tối & Sao lưu tiến độ**:
-  - Theo dõi chuỗi ngày học (Streak), mục tiêu XP hằng ngày và xuất/nhập bản sao lưu `.json`.
+1. **Lớp 1 — Giọng người bản xứ thu âm thật (MP3):** Tự động gọi **Free Dictionary API** (`api.dictionaryapi.dev`, miễn phí, không cần API key) cho từ đơn và từ khóa, phát file MP3 chuẩn US/UK kèm cache cục bộ.
+2. **Lớp 2 — Giọng AI Neural Kokoro-82M chạy ngay trên trình duyệt:** Bấm **🎙 Cấu hình Giọng → 🧠 Kích hoạt AI Kokoro-82M** để tải mô hình AI mã nguồn mở `kokoro-js` (WebGPU/WASM, hỗ trợ 5 giọng Mỹ/Anh tự nhiên: *Heart, Bella, Michael, Emma, George*).
+3. **Lớp 3 — Bộ lọc giọng tự nhiên đa vùng miền (US / UK / AU):** Tự động ưu tiên giọng *Microsoft Online Natural* / *Google Natural* / *Apple Enhanced* tốt nhất có sẵn trên thiết bị và cho phép tùy chỉnh tốc độ `0.65x – 1.25x`.
 
-## Cách sử dụng
+## 6 Không gian huấn luyện cá nhân hóa
 
-1. Mở trực tiếp tệp `index.html` trên trình duyệt hiện đại (Chrome, Edge, Safari, Firefox), hoặc chạy một server tĩnh bất kỳ:
-   ```bash
-   python3 -m http.server 8000
-   ```
-2. **Bật GitHub Pages để học online miễn phí**:
-   - Vào **Settings → Pages** trong repository này trên GitHub.
-   - Tại mục **Build and deployment → Source**, chọn **GitHub Actions** (workflow `.github/workflows/pages.yml` đã được thiết lập sẵn).
+1. **Lộ trình & Phiên học Hôm nay (`08:00–08:45` & `20:00–21:00`):**
+   - Hiển thị 3 điểm nghẽn chẩn đoán, đồng hồ phiên học tập trung (`15p / 20p / 30p / 45p / 60p`), checklist Thứ 2 → Chủ Nhật theo nguyên tắc *Input trước – Output sau*.
+   - Bản đồ tiến độ 3 giai đoạn / 24 tuần + nút **Xuất lịch `.ics`** để nhập thẳng vào **Google Calendar**.
+2. **Collocations SM-2 (Chuẩn Anki) & Tra Từ Trực Tuyến:**
+   - 42 cụm *Verb + Noun Collocations*, *Academic C1*, *Discourse Markers* và *Sắc thái/Idioms C1* kèm cảnh báo **bẫy dịch Việt–Anh**.
+   - Thuật toán **SM-2 Spaced Repetition** tính ngày ôn tối ưu (`Quên / Khó / Tốt / Rất dễ`).
+   - Tra từ trực tuyến kết hợp **Free Dictionary API + Datamuse API** để lấy MP3 người thật, Collocations, đồng nghĩa C1 và lưu vào bộ thẻ chỉ với 1 bấm.
+3. **Ngữ pháp C1 (Điểm nghẽn #2):**
+   - 6 chuyên đề trọng tâm: *Mixed Conditionals*, *Mandative Subjunctive*, *Negative Inversion*, *Cleft Sentences*, *Past Modals & Reporting Verbs*, *Nominalization*.
+   - So sánh trực quan **B1 → C1** có âm thanh và bài tập tự động lưu câu sai vào *Error Log*.
+4. **Xưởng Micro-Writing (20:00) & Paraphrasing C1:**
+   - Bộ kiểm tra tiêu chí C1 trực tiếp khi gõ (độ dài, số câu, collocations, cấu trúc C1), lưu **Nhật ký Viết**.
+   - Hỗ trợ tùy chọn dán **Google Gemini API Key miễn phí** (chỉ lưu trong `localStorage` của trình duyệt) để AI chấm điểm bài viết theo khung CEFR C1.
+5. **Nghe Sâu Đa Giọng (US / UK / AU) & Phòng Nói 3-2-1 / Shadowing:**
+   - Nghe điền từ & chép chính tả đa giọng đọc + khung **Cornell Notes**.
+   - **Chấm phát âm Shadowing** theo thời gian thực (`Web Speech Recognition`), **Ghi âm so sánh** (`MediaRecorder`) và đồng hồ **3-2-1 Speaking** kèm cụm *Discourse Markers C1*.
+6. **Sổ Lỗi Cá Nhân (Error Log) & Kiểm Tra Thứ Bảy:**
+   - Tự động thu thập lỗi từ các bài luyện tập và cho phép ghi lỗi thủ công để rà soát hàng tuần.
 
-## Cấu trúc thư mục
+## Cấu trúc mã nguồn
 
 ```text
 .
-├── index.html                   # Trang chính và các không gian học tập
-├── css/
-│   └── styles.css               # Hệ thống giao diện sáng/tối & responsive
-├── js/
-│   ├── data.js                  # Dữ liệu từ vựng, bài nghe, ngữ pháp, hội thoại
-│   ├── audio.js                 # Bộ phát âm Web Speech API (US/UK)
-│   └── app.js                   # Logic tương tác, kiểm tra, lưu tiến độ
-└── .github/workflows/pages.yml  # Triển khai tự động lên GitHub Pages
+├── index.html                   # 6 không gian huấn luyện C1 & hộp thoại cấu hình giọng AI
+├── css/styles.css               # Hệ thống thiết kế sáng/tối responsive
+├── js/roadmap-data.js           # Dữ liệu lộ trình 24 tuần, Collocations, Ngữ pháp C1, Micro-Writing, Speaking
+├── js/sm2.js                    # Thuật toán lặp lại ngắt quãng Anki SM-2
+├── js/audio.js                  # Bộ phát âm 3 lớp (Human MP3 + Kokoro-82M AI + US/UK/AU) + STT/Recorder
+├── js/app.js                    # Điều phối ứng dụng, xuất .ics, Error Log, Gemini BYOK & sao lưu JSON
+└── .github/workflows/pages.yml  # Tự động triển khai GitHub Pages
 ```
+
+## Triển khai miễn phí trên GitHub Pages
+
+Vào **Settings → Pages** trong repository này → tại mục **Build and deployment → Source** chọn **GitHub Actions** để website tự động chạy trực tuyến tại `https://kendkdevelops.github.io/hoc-tieng-anh/`.

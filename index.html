@@ -3,17 +3,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LingoCraft — Học Tiếng Anh Chủ Động Mỗi Ngày</title>
+  <title>LingoCraft C1 — Lộ Trình Huấn Luyện Tiếng Anh B1 → C1 (6 Tháng)</title>
   <meta
     name="description"
-    content="Website học tiếng Anh tương tác dành cho người Việt: Flashcard từ vựng phát âm chuẩn Anh-Mỹ & Anh-Anh, luyện nghe chép chính tả, ngữ pháp cốt lõi, hội thoại thực tế và bài kiểm tra thông minh."
+    content="Không gian huấn luyện tiếng Anh cá nhân hóa từ B1 lên CEFR C1 trong 6 tháng: Collocations SM-2 chuẩn Anki, Ngữ pháp Giả định & Đảo ngữ, Micro-Writing 20:00, Luyện nghe US/UK/AU, Shadowing 3-2-1 và phát âm tự nhiên miễn phí."
   />
-  <meta property="og:title" content="LingoCraft — Học Tiếng Anh Chủ Động Mỗi Ngày" />
-  <meta
-    property="og:description"
-    content="Học từ vựng, luyện nghe chép chính tả, ngữ pháp và hội thoại tiếng Anh hoàn toàn miễn phí ngay trên trình duyệt."
-  />
-  <meta property="og:type" content="website" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -27,358 +21,560 @@
   <!-- Sticky Top Bar -->
   <header class="site-header">
     <div class="container header-inner">
-      <button type="button" class="brand" id="brand-home" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
-        <span class="brand-mark" aria-hidden="true">L</span>
-        <span>LingoCraft</span>
+      <button type="button" class="brand" id="brand-home" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+        <span class="brand-mark" aria-hidden="true">C1</span>
+        <span>
+          <span class="brand-title">LingoCraft C1 Studio</span>
+          <span class="brand-sub">Lộ trình cá nhân B1+ → C1 · 24 Tuần</span>
+        </span>
       </button>
 
       <div class="header-controls">
-        <div class="stat-chip streak-chip" title="Chuỗi ngày học liên tiếp">
-          <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor" aria-hidden="true">
-            <path d="M12.7 2.3a.75.75 0 0 0-1.26.44c-.32 2.46-1.94 4.18-3.32 5.64C6.65 9.95 5.5 11.17 5.5 13.75a6.5 6.5 0 0 0 13 0c0-3.82-2.25-7.43-5.8-11.45ZM12 18.75a3 3 0 0 1-3-3c0-1.27.62-2.16 1.56-3.15.46-.49.98-1.03 1.44-1.69.92 1.36 3 3.24 3 4.84a3 3 0 0 1-3 3Z"/>
-          </svg>
-          <strong id="stat-streak">1</strong>
-          <span class="label-hide">ngày</span>
+        <div class="stat-chip" title="Chuỗi ngày duy trì">
+          🔥 <strong id="stat-streak">1</strong> <span class="hide-xs">ngày</span>
+        </div>
+        <div class="stat-chip" title="Điểm kinh nghiệm tích lũy">
+          ★ <strong id="stat-xp">0</strong> <span class="hide-xs">XP</span>
         </div>
 
-        <div class="stat-chip xp-chip" title="Tổng điểm kinh nghiệm (XP)">
-          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true">
-            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
-          </svg>
-          <strong id="stat-xp">0</strong>
-          <span class="label-hide">XP</span>
+        <div class="voice-toggle" role="group" aria-label="Chọn giọng vùng miền">
+          <button type="button" id="accent-us" data-accent="en-US" class="active" title="Anh - Mỹ (US)">US</button>
+          <button type="button" id="accent-uk" data-accent="en-GB" title="Anh - Anh (UK)">UK</button>
+          <button type="button" id="accent-au" data-accent="en-AU" title="Anh - Úc (AU)">AU</button>
         </div>
 
-        <div class="voice-toggle" role="group" aria-label="Chọn giọng phát âm">
-          <button type="button" id="accent-us" data-accent="en-US" class="active" title="Giọng Anh - Mỹ">US</button>
-          <button type="button" id="accent-uk" data-accent="en-GB" title="Giọng Anh - Anh">UK</button>
-        </div>
+        <button type="button" id="btn-audio-settings" class="audio-engine-btn" title="Cấu hình Giọng người thật, AI Kokoro-82M & Gemini">
+          🎙 Cấu hình Giọng
+        </button>
 
-        <button type="button" id="theme-toggle" class="icon-btn" aria-label="Chuyển đổi chế độ sáng tối"></button>
+        <button type="button" id="theme-toggle" class="icon-btn" aria-label="Đổi giao diện sáng/tối"></button>
       </div>
     </div>
   </header>
 
-  <!-- Primary Navigation Strip -->
-  <nav class="nav-strip" aria-label="Chức năng học tập chính">
+  <!-- Primary Navigation -->
+  <nav class="nav-strip" aria-label="Không gian huấn luyện C1">
     <div class="container">
       <div class="nav-tabs" role="tablist">
-        <button type="button" class="nav-tab active" role="tab" aria-selected="true" id="tab-flashcards" data-tab="flashcards">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 9h4m-4 4h10"/></svg>
-          <span>Flashcards</span>
+        <button type="button" class="nav-tab active" role="tab" aria-selected="true" id="tab-roadmap" data-tab="roadmap">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h4l3-9 4 18 3-9h4"/></svg>
+          <span>Lộ trình & Hôm nay</span>
         </button>
-        <button type="button" class="nav-tab" role="tab" aria-selected="false" id="tab-wordbook" data-tab="wordbook">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>
-          <span>Sổ từ vựng</span>
-        </button>
-        <button type="button" class="nav-tab" role="tab" aria-selected="false" id="tab-listening" data-tab="listening">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg>
-          <span>Luyện nghe</span>
+        <button type="button" class="nav-tab" role="tab" aria-selected="false" id="tab-collocations" data-tab="collocations">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M7 9h4m-4 4h10"/></svg>
+          <span>Collocations SM-2</span>
+          <span class="nav-count" id="nav-due-count">42</span>
         </button>
         <button type="button" class="nav-tab" role="tab" aria-selected="false" id="tab-grammar" data-tab="grammar">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
-          <span>Ngữ pháp</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
+          <span>Ngữ pháp C1</span>
         </button>
-        <button type="button" class="nav-tab" role="tab" aria-selected="false" id="tab-dialogues" data-tab="dialogues">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-          <span>Hội thoại</span>
+        <button type="button" class="nav-tab" role="tab" aria-selected="false" id="tab-writing" data-tab="writing">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>
+          <span>Micro-Writing 20:00</span>
         </button>
-        <button type="button" class="nav-tab" role="tab" aria-selected="false" id="tab-quiz" data-tab="quiz">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
-          <span>Kiểm tra</span>
+        <button type="button" class="nav-tab" role="tab" aria-selected="false" id="tab-speaking" data-tab="speaking">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg>
+          <span>Nghe sâu & Nói 3-2-1</span>
+        </button>
+        <button type="button" class="nav-tab" role="tab" aria-selected="false" id="tab-review" data-tab="review">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+          <span>Error Log & Test</span>
+          <span class="nav-count" id="nav-err-count">2</span>
         </button>
       </div>
     </div>
   </nav>
 
-  <!-- Main Study Workspace -->
   <main class="container">
-    <section class="page-intro">
-      <div>
-        <h1>Học tiếng Anh rõ ràng, thực tế mỗi ngày</h1>
-        <p>
-          Luyện phát âm chuẩn US/UK, ghi nhớ từ vựng theo ngữ cảnh, chép chính tả và thực hành hội thoại đời thực — tiến độ được lưu tự động trên máy của bạn.
-        </p>
+    <!-- ============================================================
+         TAB 1: PERSONAL C1 ROADMAP & DAILY PLANNER
+         ============================================================ -->
+    <section id="panel-roadmap" class="tab-panel active" role="tabpanel" aria-labelledby="tab-roadmap">
+      <div class="section-head">
+        <div>
+          <h1>Lộ Trình Cá Nhân: Từ B1 Vững Lên Chuẩn CEFR C1 (6 Tháng)</h1>
+          <p>
+            <strong>Thế mạnh đã chẩn đoán:</strong> Đọc hiểu 100% (B2/C1), Nghe hiểu 67% (B1+), vững Present Perfect vs Past Simple &amp; Having + V3. Trọng tâm của trang này là đánh thẳng vào <strong>3 điểm nghẽn Output</strong> của riêng bạn.
+          </p>
+        </div>
+        <button type="button" id="btn-export-ics" class="btn btn-primary">
+          📅 Xuất lịch học 08:00 &amp; 20:00 (.ics)
+        </button>
       </div>
-      <div class="daily-goal-box" aria-label="Mục tiêu học hôm nay">
-        <div class="daily-goal-top">
-          <span>Mục tiêu hôm nay</span>
-          <strong id="daily-goal-text">0 / 100 XP</strong>
+
+      <!-- 3 Personal Bottlenecks -->
+      <div class="bottleneck-grid" id="bottleneck-grid"></div>
+
+      <!-- Session Pomodoro Timer -->
+      <div class="timer-strip">
+        <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;">
+          <div>
+            <div style="font-size:0.74rem;font-weight:700;text-transform:uppercase;color:var(--text-muted);">Đồng hồ Phiên Học Tập Trung</div>
+            <div class="timer-clock" id="session-timer-clock">15:00</div>
+          </div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;">
+            <button type="button" class="btn btn-secondary btn-sm" data-timer-min="15">15p Anki</button>
+            <button type="button" class="btn btn-secondary btn-sm" data-timer-min="20">20p Micro-Writing</button>
+            <button type="button" class="btn btn-secondary btn-sm" data-timer-min="30">30p Nghe sâu</button>
+            <button type="button" class="btn btn-secondary btn-sm" data-timer-min="45">45p Sáng</button>
+            <button type="button" class="btn btn-secondary btn-sm" data-timer-min="60">60p Tối</button>
+          </div>
         </div>
-        <div class="progress-track">
-          <div class="progress-fill" id="daily-goal-fill" style="width: 0%"></div>
+        <button type="button" id="btn-timer-toggle" class="btn btn-primary">▶ Bắt đầu phiên</button>
+      </div>
+
+      <!-- Daily Weekly Schedule -->
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:12px;">
+        <h2 style="font-family:var(--font-serif);font-size:1.35rem;margin:0;">Lịch Huấn Luyện Hàng Ngày (Input trước → Output sau)</h2>
+        <div class="filter-bar" id="weekday-pills" style="margin:0;"></div>
+      </div>
+
+      <div class="today-grid">
+        <div class="session-card">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;">
+            <h3 style="margin:0;font-size:1rem;">Phiên Sáng — Input &amp; Memory</h3>
+            <span class="session-time">08:00 – 08:45 (45p)</span>
+          </div>
+          <ul class="task-list" id="morning-session-list"></ul>
         </div>
+        <div class="session-card">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;">
+            <h3 style="margin:0;font-size:1rem;">Phiên Tối — Output &amp; Coaching</h3>
+            <span class="session-time">20:00 – 21:00 (60p)</span>
+          </div>
+          <ul class="task-list" id="evening-session-list"></ul>
+        </div>
+      </div>
+
+      <!-- 3-Phase / 24-Week Roadmap -->
+      <div style="margin-top:26px;">
+        <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:10px;">
+          <h2 style="font-family:var(--font-serif);font-size:1.4rem;margin:0;">Bản Đồ Tiến Độ 24 Tuần (3 Giai Đoạn)</h2>
+          <strong id="roadmap-progress-label" style="font-size:0.86rem;color:var(--brand-text);">0/12 chặng tuần (0%)</strong>
+        </div>
+        <div class="progress-track" style="margin-bottom:18px;">
+          <div class="progress-fill" id="roadmap-progress-fill" style="width:0%"></div>
+        </div>
+        <div class="phase-grid" id="phase-grid"></div>
       </div>
     </section>
 
     <!-- ============================================================
-         PANEL 1: FLASHCARDS
+         TAB 2: COLLOCATIONS SM-2 + LIVE FREE DICTIONARY EXPLORER
          ============================================================ -->
-    <section id="panel-flashcards" class="tab-panel active" role="tabpanel" aria-labelledby="tab-flashcards">
-      <div class="filter-bar" id="fc-topic-pills"></div>
+    <section id="panel-collocations" class="tab-panel" role="tabpanel" aria-labelledby="tab-collocations">
+      <div class="section-head">
+        <div>
+          <h2>Collocations &amp; Cụm Từ C1 (Thuật Toán Anki SM-2)</h2>
+          <p>
+            Đánh thẳng <strong>Điểm nghẽn #1 (50%)</strong>: học nguyên cụm <em>Verb + Noun Collocations</em>, chỉ rõ bẫy dịch Việt–Anh và phát âm giọng người bản xứ thu âm thật (Free Dictionary API) hoặc AI Kokoro-82M.
+          </p>
+        </div>
+      </div>
 
-      <div class="flashcard-layout">
-        <div class="deck-stage">
-          <div class="deck-meta">
-            <span id="fc-counter">Thẻ 1 / 60</span>
+      <div class="filter-bar" id="col-cat-pills"></div>
+
+      <div class="srs-layout">
+        <div>
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px;font-size:0.86rem;color:var(--text-secondary);">
+            <span id="col-counter">Cụm 1 / 42</span>
             <div style="display:flex;gap:8px;flex-wrap:wrap;">
-              <button type="button" id="fc-review-toggle" class="btn btn-secondary btn-sm">Chỉ xem từ chưa thuộc</button>
-              <button type="button" id="fc-shuffle" class="btn btn-secondary btn-sm">Xáo trộn</button>
+              <button type="button" id="col-due-toggle" class="btn btn-secondary btn-sm">Chỉ xem thẻ đến hạn ôn</button>
+              <button type="button" id="col-shuffle" class="btn btn-secondary btn-sm">Xáo trộn</button>
             </div>
           </div>
-          <div class="progress-track">
-            <div class="progress-fill" id="fc-progress-fill" style="width: 2%"></div>
+          <div class="progress-track" style="margin-bottom:14px;">
+            <div class="progress-fill" id="col-progress-fill" style="width:3%"></div>
           </div>
 
           <div class="flashcard-scene">
-            <div class="flashcard-card" id="flashcard-card" tabindex="0" role="button" aria-label="Bấm hoặc nhấn phím Space để lật thẻ từ vựng">
-              <!-- Front -->
-              <div class="flashcard-face flashcard-front">
-                <div class="card-top-row">
-                  <div class="card-badges" id="fc-front-badges"></div>
-                  <div id="fc-front-status"></div>
+            <div class="flashcard-card" id="col-card" tabindex="0" role="button" aria-label="Bấm hoặc nhấn Space để lật thẻ">
+              <div class="flashcard-face">
+                <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;">
+                  <div id="col-front-badges" style="display:flex;gap:6px;"></div>
+                  <div id="col-front-status"></div>
                 </div>
-                <div class="card-center">
-                  <div class="card-word" id="fc-word">convenient</div>
-                  <div class="card-ipa" id="fc-ipa">/kənˈviː.ni.ənt/</div>
-                  <div class="audio-actions">
-                    <button type="button" class="speak-btn" id="fc-speak-normal">
-                      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>
-                      Nghe chuẩn
-                    </button>
-                    <button type="button" class="speak-btn" id="fc-speak-slow" title="Nghe tốc độ chậm 0.7x">
-                      0.7x Chậm
-                    </button>
+                <div style="text-align:center;margin:auto 0;padding:12px 0;">
+                  <div class="card-word" id="col-chunk">maintain a habit</div>
+                  <div class="card-ipa" id="col-ipa">/meɪnˈteɪn ə ˈhæb.ɪt/</div>
+                  <div style="display:flex;justify-content:center;gap:8px;flex-wrap:wrap;">
+                    <button type="button" class="speak-btn" id="col-speak-chunk">🔊 Nghe cả cụm</button>
+                    <button type="button" class="speak-btn" id="col-speak-headword" title="Phát âm MP3 người thật cho từ khóa">🎙 Từ khóa (MP3 thật)</button>
+                    <button type="button" class="speak-btn" id="col-speak-slow">0.72x Chậm</button>
                   </div>
+                  <div class="audio-source-tag" id="col-audio-status"></div>
                 </div>
-                <div class="card-hint">Chạm vào thẻ hoặc nhấn <kbd>Space</kbd> để xem nghĩa & ví dụ</div>
+                <div style="text-align:center;font-size:0.78rem;color:var(--text-muted);">
+                  Bấm vào thẻ hoặc phím <code>Space</code> để lật · Phím <code>S</code> để nghe · Phím <code>1–4</code> để chấm SM-2
+                </div>
               </div>
 
-              <!-- Back -->
               <div class="flashcard-face flashcard-back">
-                <div class="card-top-row">
-                  <strong id="fc-back-word" style="font-family:var(--font-serif);font-size:1.2rem;">convenient</strong>
-                  <div id="fc-back-status"></div>
+                <div style="display:flex;justify-content:space-between;align-items:center;">
+                  <strong id="col-back-chunk" style="font-family:var(--font-serif);font-size:1.2rem;"></strong>
+                  <div id="col-back-status"></div>
                 </div>
-                <div class="card-center" style="padding:10px 0;">
-                  <div class="card-meaning" id="fc-meaning">thuận tiện, tiện lợi</div>
-                  <div class="card-example-box">
-                    <div class="card-example-en">
-                      <span id="fc-example-en"></span>
-                      <button type="button" class="icon-btn" id="fc-speak-example" title="Nghe câu ví dụ" style="flex-shrink:0;width:30px;height:30px;">
-                        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
-                      </button>
+                <div style="margin:auto 0;">
+                  <div id="col-meaning" style="font-size:1.45rem;font-weight:700;color:var(--brand-text);text-align:center;margin-bottom:10px;"></div>
+                  <div style="background:var(--bg-surface-subtle);border-radius:var(--radius-md);padding:13px 15px;">
+                    <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px;font-weight:600;font-size:0.95rem;">
+                      <span id="col-example-en"></span>
+                      <button type="button" id="col-speak-example" class="btn btn-secondary btn-sm" style="flex-shrink:0;">🔊 Nghe câu</button>
                     </div>
-                    <p class="card-example-vi" id="fc-example-vi"></p>
+                    <div id="col-example-vi" style="font-size:0.85rem;color:var(--text-secondary);margin-top:4px;"></div>
                   </div>
-                  <div class="card-tip" id="fc-tip"></div>
+                  <div class="trap-banner" id="col-trap"></div>
                 </div>
-                <div class="card-hint">Đánh giá mức độ ghi nhớ bên dưới để sang thẻ tiếp theo</div>
+                <div style="text-align:center;font-size:0.78rem;color:var(--text-muted);">Đánh giá theo thuật toán SM-2 bên dưới</div>
               </div>
             </div>
           </div>
 
-          <!-- SRS Mastery Rating -->
-          <div class="srs-actions">
-            <button type="button" class="srs-btn hard" id="srs-hard">
-              <span>Chưa nhớ</span>
-              <small>Phím 1 · Ôn ngay</small>
+          <!-- SM-2 Rating Buttons -->
+          <div class="sm2-grid">
+            <button type="button" class="sm2-btn again" id="sm2-again">
+              <span>1 · Quên</span>
+              <small id="sm2-lbl-again">10 phút</small>
             </button>
-            <button type="button" class="srs-btn good" id="srs-good">
-              <span>Tạm nhớ</span>
-              <small>Phím 2 · +5 XP</small>
+            <button type="button" class="sm2-btn hard" id="sm2-hard">
+              <span>2 · Khó</span>
+              <small id="sm2-lbl-hard">1 ngày</small>
             </button>
-            <button type="button" class="srs-btn easy" id="srs-easy">
-              <span>Đã thuộc</span>
-              <small>Phím 3 · +10 XP</small>
+            <button type="button" class="sm2-btn good" id="sm2-good">
+              <span>3 · Tốt</span>
+              <small id="sm2-lbl-good">1 ngày</small>
+            </button>
+            <button type="button" class="sm2-btn easy" id="sm2-easy">
+              <span>4 · Rất dễ</span>
+              <small id="sm2-lbl-easy">4 ngày</small>
             </button>
           </div>
 
-          <div class="deck-nav-row">
-            <button type="button" class="btn btn-secondary" id="fc-prev">← Thẻ trước</button>
-            <button type="button" class="btn btn-secondary" id="fc-next">Thẻ tiếp theo →</button>
+          <div style="display:flex;justify-content:space-between;margin-top:12px;">
+            <button type="button" id="col-prev" class="btn btn-secondary btn-sm">← Cụm trước</button>
+            <button type="button" id="col-next" class="btn btn-secondary btn-sm">Cụm tiếp theo →</button>
           </div>
         </div>
 
-        <!-- Side Summary Card -->
-        <aside class="side-card">
-          <h2>Tiến độ từ vựng</h2>
-          <div class="mini-stats">
-            <div class="mini-stat">
-              <strong id="stat-mastered" style="color:var(--success)">0</strong>
-              <span>Đã thuộc</span>
-            </div>
-            <div class="mini-stat">
-              <strong id="stat-review" style="color:var(--warning)">0</strong>
-              <span>Cần ôn</span>
-            </div>
-            <div class="mini-stat">
-              <strong id="stat-unseen">60</strong>
-              <span>Từ mới</span>
+        <!-- Sidebar: SM-2 Stats + Live Free Dictionary & Datamuse Explorer -->
+        <aside style="display:flex;flex-direction:column;gap:16px;">
+          <div class="card" style="padding:18px;">
+            <div class="card-title" style="margin-bottom:10px;">Thống kê Anki SM-2</div>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center;">
+              <div style="background:var(--warning-soft);padding:10px 6px;border-radius:var(--radius-sm);">
+                <strong id="sm2-due-stat" style="display:block;font-size:1.25rem;color:var(--warning);">42</strong>
+                <span style="font-size:0.72rem;color:var(--text-secondary);">Cần ôn</span>
+              </div>
+              <div style="background:var(--info-soft);padding:10px 6px;border-radius:var(--radius-sm);">
+                <strong id="sm2-learning-stat" style="display:block;font-size:1.25rem;color:var(--info);">0</strong>
+                <span style="font-size:0.72rem;color:var(--text-secondary);">Đang nhớ</span>
+              </div>
+              <div style="background:var(--success-soft);padding:10px 6px;border-radius:var(--radius-sm);">
+                <strong id="sm2-mastered-stat" style="display:block;font-size:1.25rem;color:var(--success);">0</strong>
+                <span style="font-size:0.72rem;color:var(--text-secondary);">Vững C1</span>
+              </div>
             </div>
           </div>
-          <p style="font-size:0.84rem;color:var(--text-secondary);margin:0;">
-            Mẹo học nhanh: Nghe phát âm trước, đọc to lại 2 lần, sau đó lật thẻ đọc nguyên câu ví dụ để não ghi nhớ theo ngữ cảnh.
-          </p>
-          <ul class="shortcut-list">
-            <li><span>Lật thẻ</span><kbd>Space</kbd></li>
-            <li><span>Nghe phát âm</span><kbd>S</kbd></li>
-            <li><span>Chuyển thẻ</span><span><kbd>←</kbd> <kbd>→</kbd></span></li>
-            <li><span>Đánh giá thẻ</span><span><kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd></span></li>
-          </ul>
+
+          <div class="card" style="padding:18px;">
+            <div class="card-title" style="margin-bottom:6px;">Tra Từ &amp; Collocations Trực Tuyến</div>
+            <p style="font-size:0.8rem;color:var(--text-secondary);margin:0 0 10px;">
+              Dùng miễn phí <strong>Free Dictionary API</strong> (MP3 giọng người thật) + <strong>Datamuse API</strong> để tìm Collocations &amp; đồng nghĩa C1 khi đọc <em>BBC / The Guardian</em>, lưu vào SM-2 chỉ với 1 bấm.
+            </p>
+            <div style="display:flex;gap:6px;">
+              <input type="text" id="lookup-input" class="input" placeholder="Gõ 1 từ tiếng Anh (vd: consensus)" />
+              <button type="button" id="btn-lookup-go" class="btn btn-primary btn-sm">Tra</button>
+            </div>
+            <div id="lookup-result" class="lookup-result hidden"></div>
+          </div>
         </aside>
       </div>
     </section>
 
     <!-- ============================================================
-         PANEL 2: WORDBOOK & CUSTOM WORDS
-         ============================================================ -->
-    <section id="panel-wordbook" class="tab-panel" role="tabpanel" aria-labelledby="tab-wordbook">
-      <div class="toolbar">
-        <div class="search-wrap">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <input type="search" id="wb-search" class="input" placeholder="Tìm từ tiếng Anh, nghĩa tiếng Việt hoặc ví dụ..." />
-        </div>
-        <div style="display:flex;align-items:center;gap:10px;">
-          <span id="wb-count" style="font-size:0.875rem;color:var(--text-secondary);font-weight:600;">60 từ</span>
-          <button type="button" id="btn-toggle-add-word" class="btn btn-primary">+ Thêm từ của tôi</button>
-        </div>
-      </div>
-
-      <div class="filter-bar">
-        <button type="button" class="topic-pill active" data-wb-filter="all">Tất cả</button>
-        <button type="button" class="topic-pill" data-wb-filter="mastered">Đã thuộc</button>
-        <button type="button" class="topic-pill" data-wb-filter="review">Cần ôn lại</button>
-        <button type="button" class="topic-pill" data-wb-filter="unseen">Chưa học</button>
-        <button type="button" class="topic-pill" data-wb-filter="custom">Từ tự thêm</button>
-      </div>
-
-      <!-- Custom Word Form -->
-      <div id="add-word-panel" class="add-word-panel hidden">
-        <h2 style="font-size:1.05rem;margin:0 0 14px;">Thêm từ vựng cá nhân vào sổ tay</h2>
-        <form id="add-word-form">
-          <div class="form-grid">
-            <div class="field">
-              <label for="new-word-en">Từ tiếng Anh *</label>
-              <input id="new-word-en" class="input" type="text" placeholder="Ví dụ: breakthrough" required />
-            </div>
-            <div class="field">
-              <label for="new-word-vi">Nghĩa tiếng Việt *</label>
-              <input id="new-word-vi" class="input" type="text" placeholder="Ví dụ: bước đột phá" required />
-            </div>
-            <div class="field">
-              <label for="new-word-ipa">Phiên âm IPA (tuỳ chọn)</label>
-              <input id="new-word-ipa" class="input" type="text" placeholder="/ˈbreɪk.θruː/" />
-            </div>
-            <div class="field">
-              <label for="new-word-pos">Từ loại</label>
-              <select id="new-word-pos" class="select">
-                <option value="noun">noun (Danh từ)</option>
-                <option value="verb">verb (Động từ)</option>
-                <option value="adjective">adjective (Tính từ)</option>
-                <option value="adverb">adverb (Trạng từ)</option>
-                <option value="phrasal verb">phrasal verb (Cụm động từ)</option>
-              </select>
-            </div>
-          </div>
-          <div class="field" style="margin-bottom:14px;">
-            <label for="new-word-ex">Câu ví dụ (tuỳ chọn)</label>
-            <input id="new-word-ex" class="input" type="text" placeholder="Scientists achieved a major breakthrough in clean energy." />
-          </div>
-          <button type="submit" class="btn btn-primary">Lưu vào sổ từ & bộ Flashcard</button>
-        </form>
-      </div>
-
-      <div class="word-grid" id="wordbook-grid"></div>
-    </section>
-
-    <!-- ============================================================
-         PANEL 3: LISTENING & DICTATION
-         ============================================================ -->
-    <section id="panel-listening" class="tab-panel" role="tabpanel" aria-labelledby="tab-listening">
-      <div class="studio-card">
-        <div class="deck-meta" style="margin-bottom:14px;">
-          <span id="listen-counter">Bài nghe 1 / 10</span>
-          <span class="badge badge-level" id="listen-level">A2</span>
-        </div>
-
-        <div class="mode-switch" role="group" aria-label="Chế độ luyện nghe">
-          <button type="button" class="active" data-listen-mode="blank">Nghe & Điền từ</button>
-          <button type="button" data-listen-mode="full">Chép chính tả cả câu</button>
-        </div>
-
-        <div class="audio-player-bar">
-          <div style="display:flex;gap:10px;flex-wrap:wrap;">
-            <button type="button" class="btn btn-primary" id="listen-play-normal">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
-              Nghe câu (1.0x)
-            </button>
-            <button type="button" class="btn btn-secondary" id="listen-play-slow">Nghe chậm (0.72x)</button>
-          </div>
-          <span style="font-size:0.82rem;color:var(--text-muted);">Đổi giọng US/UK ở góc trên phải</span>
-        </div>
-
-        <div class="dictation-prompt" id="listen-prompt"></div>
-
-        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;">
-          <input type="text" id="listen-input" class="input" style="flex:1;min-width:220px;" autocomplete="off" spellcheck="false" />
-          <button type="button" id="listen-check-btn" class="btn btn-primary">Kiểm tra</button>
-        </div>
-
-        <div id="listen-result" class="diff-result" style="display:none;"></div>
-
-        <div class="deck-nav-row" style="margin-top:22px;padding-top:16px;border-top:1px solid var(--border-subtle);">
-          <button type="button" class="btn btn-secondary" id="listen-prev">← Câu trước</button>
-          <button type="button" class="btn btn-secondary" id="listen-next">Câu tiếp theo →</button>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================================================
-         PANEL 4: GRAMMAR GUIDE
+         TAB 3: C1 GRAMMAR STUDIO (BOTTLENECK #2)
          ============================================================ -->
     <section id="panel-grammar" class="tab-panel" role="tabpanel" aria-labelledby="tab-grammar">
-      <div class="grammar-layout">
-        <aside class="grammar-sidebar" id="grammar-sidebar" aria-label="Danh sách bài ngữ pháp"></aside>
-        <article class="grammar-article" id="grammar-article"></article>
+      <div class="section-head">
+        <div>
+          <h2>Ngữ Pháp C1 &amp; Xử Lý Điểm Nghẽn Giả Định – Nhấn Mạnh (31%)</h2>
+          <p>
+            Thiết kế riêng theo lỗ hổng chẩn đoán của bạn: ưu tiên số 1 cho <strong>Mixed Conditionals</strong>, <strong>Subjunctive Mood</strong> và <strong>Negative Inversion</strong>. Mọi câu làm sai sẽ tự động ghi vào <em>Error Log</em>.
+          </p>
+        </div>
+      </div>
+
+      <div class="split-layout">
+        <aside class="side-nav" id="grammar-sidebar" aria-label="Danh sách chuyên đề ngữ pháp C1"></aside>
+        <article class="card" id="grammar-article"></article>
       </div>
     </section>
 
     <!-- ============================================================
-         PANEL 5: REAL-LIFE DIALOGUES
+         TAB 4: MICRO-WRITING 20:00 & PARAPHRASING C1 (BOTTLENECK #3)
          ============================================================ -->
-    <section id="panel-dialogues" class="tab-panel" role="tabpanel" aria-labelledby="tab-dialogues">
-      <div class="dialogue-layout">
-        <aside class="grammar-sidebar" id="dialogue-sidebar" aria-label="Danh sách tình huống hội thoại"></aside>
-        <div class="dialogue-box" id="dialogue-box"></div>
+    <section id="panel-writing" class="tab-panel" role="tabpanel" aria-labelledby="tab-writing">
+      <div class="section-head">
+        <div>
+          <h2>Xưởng Micro-Writing (20:00) &amp; Paraphrasing B1 → C1</h2>
+          <p>
+            Xóa bỏ rào cản ngại viết dài bằng <strong>2 câu chất lượng cao mỗi tối</strong> trong 2 tuần đầu, sau đó nâng dần lên Paraphrasing học thuật, đoạn 150 từ và bài luận C1 260–300 từ.
+          </p>
+        </div>
+      </div>
+
+      <div class="filter-bar" id="writing-prompt-pills"></div>
+
+      <div class="writing-layout">
+        <div class="card">
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px;">
+            <span class="badge badge-brand" id="wp-stage-badge"></span>
+            <span id="wp-word-count" style="font-family:var(--font-mono);font-size:0.8rem;color:var(--text-secondary);">0 từ · 0 câu</span>
+          </div>
+          <h3 id="wp-title" style="font-family:var(--font-serif);font-size:1.45rem;margin:0 0 8px;"></h3>
+          <p id="wp-instruction" style="font-size:0.9rem;color:var(--text-secondary);white-space:pre-line;margin:0 0 10px;"></p>
+          <div id="wp-hint" style="font-size:0.82rem;color:var(--accent-text);background:var(--accent-soft);padding:8px 12px;border-radius:var(--radius-sm);margin-bottom:14px;"></div>
+
+          <textarea id="writing-textarea" class="textarea" rows="6" placeholder="Bắt đầu viết 2 câu chất lượng cao (hoặc bài luận C1) của bạn tại đây..."></textarea>
+
+          <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;">
+            <button type="button" id="btn-save-journal" class="btn btn-primary">💾 Lưu vào Nhật ký Viết</button>
+            <button type="button" id="btn-ai-grade" class="btn btn-soft">🤖 Chấm bài C1 bằng AI (Gemini)</button>
+            <button type="button" id="btn-toggle-model" class="btn btn-secondary">👁 Xem bài mẫu chuẩn C1</button>
+          </div>
+
+          <div id="writing-model-box" class="hidden" style="margin-top:14px;padding:14px 16px;border-radius:var(--radius-md);background:var(--brand-soft);">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">
+              <strong style="font-size:0.86rem;color:var(--brand-text);">Bài mẫu tham khảo chuẩn C1:</strong>
+              <button type="button" id="btn-speak-model" class="btn btn-secondary btn-sm">🔊 Nghe đọc bài mẫu</button>
+            </div>
+            <div id="wp-model-text" style="font-size:0.92rem;line-height:1.6;"></div>
+          </div>
+
+          <div id="ai-writing-feedback" class="hidden" style="margin-top:14px;padding:14px 16px;border-radius:var(--radius-md);background:var(--bg-page);border:1px solid var(--border-subtle);font-size:0.88rem;"></div>
+        </div>
+
+        <aside style="display:flex;flex-direction:column;gap:16px;">
+          <div class="card" style="padding:18px;">
+            <div class="card-title" style="margin-bottom:4px;">Bộ Kiểm Tra Tiêu Chí C1 Tự Động</div>
+            <p style="font-size:0.78rem;color:var(--text-muted);margin:0;">Cập nhật trực tiếp khi bạn gõ (không cần API key).</p>
+            <ul class="criteria-list" id="wp-criteria-list"></ul>
+          </div>
+
+          <div class="card" style="padding:18px;">
+            <div class="card-title">Nhật Ký Micro-Writing Của Bạn</div>
+            <div id="writing-journal-list" style="display:flex;flex-direction:column;gap:10px;"></div>
+          </div>
+        </aside>
       </div>
     </section>
 
     <!-- ============================================================
-         PANEL 6: QUIZ ARENA
+         TAB 5: DEEP LISTENING (US/UK/AU) & 3-2-1 SPEAKING / SHADOWING
          ============================================================ -->
-    <section id="panel-quiz" class="tab-panel" role="tabpanel" aria-labelledby="tab-quiz">
-      <div class="filter-bar" style="justify-content:center;">
-        <button type="button" class="topic-pill active" data-quiz-mode="en-vi">Từ vựng Anh → Việt</button>
-        <button type="button" class="topic-pill" data-quiz-mode="vi-en">Dịch Việt → Anh</button>
-        <button type="button" class="topic-pill" data-quiz-mode="listen">Nghe & Chọn từ</button>
-        <button type="button" class="topic-pill" data-quiz-mode="grammar">Trắc nghiệm Ngữ pháp</button>
+    <section id="panel-speaking" class="tab-panel" role="tabpanel" aria-labelledby="tab-speaking">
+      <div class="section-head">
+        <div>
+          <h2>Nghe Sâu Đa Giọng (US / UK / AU) &amp; Phòng Nói 3-2-1 / Shadowing</h2>
+          <p>
+            Rèn phản xạ nối âm, âm cuối (ending sounds), chép chính tả đa giọng vùng miền (lịch Thứ Sáu) và tăng độ trôi chảy nói không ngập ngừng bằng phương pháp <strong>3-2-1 Speaking</strong> + <strong>Ghi âm so sánh</strong>.
+          </p>
+        </div>
       </div>
-      <div class="quiz-card" id="quiz-stage"></div>
+
+      <div class="speaking-studio">
+        <!-- Left: Deep Listening + Dictation + Shadowing Scoring -->
+        <div class="card">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:10px;">
+            <span id="listen-meta" style="font-size:0.82rem;color:var(--text-secondary);font-weight:600;"></span>
+            <span class="badge badge-brand" id="listen-level-badge">B2</span>
+          </div>
+
+          <div class="filter-bar" style="margin-bottom:12px;">
+            <button type="button" class="pill active" data-lmode="blank">Nghe &amp; Điền từ</button>
+            <button type="button" class="pill" data-lmode="full">Chép chính tả cả câu</button>
+          </div>
+
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:8px;">
+            <button type="button" id="btn-listen-normal" class="btn btn-primary btn-sm">🔊 Nghe câu mẫu</button>
+            <button type="button" id="btn-listen-slow" class="btn btn-secondary btn-sm">0.72x Nghe chậm</button>
+            <button type="button" id="btn-shadow-check" class="btn btn-soft btn-sm">🎤 Chấm phát âm Shadowing</button>
+          </div>
+          <div id="listen-audio-status" style="font-size:0.75rem;color:var(--text-muted);min-height:18px;margin-bottom:10px;"></div>
+
+          <div id="listen-prompt-box" style="font-family:var(--font-serif);font-size:1.25rem;line-height:1.55;margin-bottom:14px;"></div>
+
+          <div style="display:flex;gap:8px;">
+            <input type="text" id="listen-answer-input" class="input" autocomplete="off" spellcheck="false" />
+            <button type="button" id="btn-listen-check" class="btn btn-primary btn-sm">Kiểm tra</button>
+          </div>
+
+          <div id="listen-diff-box" class="hidden" style="margin-top:12px;padding:12px 14px;border-radius:var(--radius-md);background:var(--bg-page);border:1px solid var(--border-subtle);font-size:0.88rem;"></div>
+          <div id="shadow-score-box" class="hidden" style="margin-top:12px;padding:12px 14px;border-radius:var(--radius-md);background:var(--brand-soft);font-size:0.88rem;"></div>
+
+          <div style="display:flex;justify-content:space-between;margin-top:16px;padding-top:12px;border-top:1px solid var(--border-subtle);">
+            <button type="button" id="btn-listen-prev" class="btn btn-secondary btn-sm">← Bài trước</button>
+            <button type="button" id="btn-listen-next" class="btn btn-secondary btn-sm">Bài tiếp theo →</button>
+          </div>
+
+          <div style="margin-top:16px;padding-top:14px;border-top:1px solid var(--border-subtle);">
+            <label for="cornell-notes" style="display:block;font-size:0.8rem;font-weight:700;color:var(--text-secondary);margin-bottom:5px;">
+              Ghi chú nhanh kiểu Cornell (Từ khóa / Ý chính Podcast &amp; TED-Ed):
+            </label>
+            <textarea id="cornell-notes" class="textarea" rows="3" style="min-height:74px;" placeholder="Ghi lại từ khóa, cụm collocations nghe được khi luyện BBC 6 Minute English / The Economist..."></textarea>
+          </div>
+        </div>
+
+        <!-- Right: 3-2-1 Speaking Fluency + Voice Recorder -->
+        <div class="card">
+          <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:8px;">
+            <span class="badge badge-accent" id="sp-topic-badge"></span>
+            <button type="button" id="btn-sp-next-topic" class="btn btn-secondary btn-sm">Đổi chủ đề →</button>
+          </div>
+
+          <h3 style="font-family:var(--font-serif);font-size:1.3rem;margin:4px 0 8px;">Luyện Nói Trôi Chảy 3-2-1</h3>
+          <p id="sp-topic-prompt" style="font-size:0.95rem;font-weight:600;margin:0 0 12px;"></p>
+
+          <div style="font-size:0.78rem;font-weight:700;color:var(--text-secondary);margin-bottom:6px;">
+            Cụm Discourse Markers C1 nên chèn vào bài nói (bấm để nghe):
+          </div>
+          <div class="syn-chips" id="sp-markers-box" style="margin-bottom:14px;"></div>
+
+          <div class="round-pills">
+            <button type="button" class="round-pill active" data-round321="3">Vòng 1 · 3 phút</button>
+            <button type="button" class="round-pill" data-round321="2">Vòng 2 · 2 phút</button>
+            <button type="button" class="round-pill" data-round321="1">Vòng 3 · 1 phút</button>
+          </div>
+
+          <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 16px;border-radius:var(--radius-md);background:var(--bg-page);border:1px solid var(--border-subtle);margin-bottom:14px;">
+            <div class="timer-clock" id="sp-321-clock">03:00</div>
+            <button type="button" id="btn-321-toggle" class="btn btn-primary btn-sm">▶ Bắt đầu nói</button>
+          </div>
+
+          <div style="padding-top:14px;border-top:1px solid var(--border-subtle);">
+            <div style="font-size:0.84rem;font-weight:700;margin-bottom:8px;">Ghi âm &amp; Nghe lại tự sửa lỗi (Miễn phí trên trình duyệt)</div>
+            <button type="button" id="btn-record-voice" class="btn btn-secondary" style="width:100%;">
+              ⏺ Ghi âm giọng bạn để so sánh
+            </button>
+            <div id="recorded-audio-wrap" class="hidden" style="margin-top:12px;">
+              <audio id="recorded-audio-player" controls style="width:100%;height:38px;"></audio>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         TAB 6: PERSONAL ERROR LOG & MILESTONE DIAGNOSTIC QUIZ
+         ============================================================ -->
+    <section id="panel-review" class="tab-panel" role="tabpanel" aria-labelledby="tab-review">
+      <div class="section-head">
+        <div>
+          <h2>Sổ Lỗi Cá Nhân (Error Log) &amp; Kiểm Tra Định Kỳ Thứ Bảy</h2>
+          <p>
+            Mọi lỗi từ bài tập Ngữ pháp C1, Collocations SM-2 và Trắc nghiệm đều tự động lưu vào đây để bạn rà soát vào Thứ Bảy và Tuần 23–24, giúp xóa sạch lỗi hóa thạch (fossilized errors).
+          </p>
+        </div>
+      </div>
+
+      <div class="speaking-studio">
+        <!-- Left: Diagnostic & Milestone Quiz -->
+        <div class="card">
+          <div class="card-title">Kiểm Tra Điểm Nghẽn &amp; Use of English</div>
+          <div class="filter-bar">
+            <button type="button" class="pill active" data-qmode="collocation">Bẫy Collocations</button>
+            <button type="button" class="pill" data-qmode="grammar">Ngữ pháp C1</button>
+            <button type="button" class="pill" data-qmode="listen">Nghe US/UK/AU</button>
+          </div>
+          <div id="quiz-stage"></div>
+        </div>
+
+        <!-- Right: Personal Error Log -->
+        <div class="card">
+          <div class="card-title">Sổ Lỗi Cá Nhân (Error Log)</div>
+          <form id="manual-error-form" style="display:grid;gap:8px;margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid var(--border-subtle);">
+            <div style="display:grid;grid-template-columns:140px 1fr;gap:8px;">
+              <select id="err-cat" class="select">
+                <option value="Collocation">Collocation</option>
+                <option value="Grammar C1">Grammar C1</option>
+                <option value="Pronunciation">Phát âm</option>
+                <option value="Writing">Writing</option>
+              </select>
+              <input id="err-wrong" class="input" type="text" placeholder="Câu/cụm bạn hay nói/viết sai..." required />
+            </div>
+            <input id="err-correct" class="input" type="text" placeholder="Cách diễn đạt chuẩn C1 thay thế..." required />
+            <div style="display:flex;gap:8px;">
+              <input id="err-note" class="input" type="text" placeholder="Ghi chú ngắn (tuỳ chọn)..." />
+              <button type="submit" class="btn btn-primary btn-sm">+ Lưu lỗi</button>
+            </div>
+          </form>
+
+          <div id="error-log-list" style="display:flex;flex-direction:column;gap:10px;"></div>
+        </div>
+      </div>
     </section>
   </main>
+
+  <!-- Settings Modal: Free Natural Pronunciation + AI Coach -->
+  <div id="settings-modal" class="modal-backdrop hidden" role="dialog" aria-modal="true" aria-labelledby="settings-title">
+    <div class="modal-card">
+      <div class="modal-head">
+        <h2 id="settings-title">Cấu Hình Phát Âm Tự Nhiên &amp; Cá Nhân Hóa</h2>
+        <button type="button" id="btn-close-settings" class="icon-btn" aria-label="Đóng">✕</button>
+      </div>
+
+      <div class="setting-group">
+        <label>1. Giọng AI Neural Kokoro-82M (100% Miễn phí · Chạy cục bộ trên trình duyệt)</label>
+        <p class="setting-hint" id="kokoro-status-text" style="margin-bottom:10px;"></p>
+        <div class="progress-track" style="margin-bottom:10px;">
+          <div class="progress-fill" id="kokoro-progress-fill" style="width:0%"></div>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px;">
+          <select id="setting-kokoro-voice" class="select" style="flex:1;min-width:200px;"></select>
+          <button type="button" id="btn-load-kokoro" class="btn btn-primary btn-sm">🧠 Kích hoạt AI Kokoro-82M</button>
+        </div>
+        <button type="button" id="btn-test-voice" class="btn btn-secondary btn-sm">▶ Nghe thử câu mẫu C1</button>
+      </div>
+
+      <div class="setting-group">
+        <label style="display:flex;align-items:center;gap:8px;cursor:pointer;">
+          <input type="checkbox" id="setting-human-mp3" checked style="width:17px;height:17px;accent-color:var(--brand);" />
+          <span>2. Ưu tiên MP3 giọng người bản xứ thu âm thật (Free Dictionary API) cho từ đơn</span>
+        </label>
+        <p class="setting-hint">Tự động lấy file MP3 thu âm chuẩn US/UK từ <code>dictionaryapi.dev</code> (miễn phí, không cần key) và lưu cache.</p>
+      </div>
+
+      <div class="setting-group">
+        <label for="setting-browser-voice">3. Giọng đọc hệ thống / trình duyệt (dùng ngay khi chưa bật Kokoro AI)</label>
+        <select id="setting-browser-voice" class="select"></select>
+        <p class="setting-hint">Mẹo: Mở trang trên <strong>Microsoft Edge</strong> sẽ có sẵn miễn phí các giọng <em>Microsoft Aria / Jenny / Sonia Online (Natural)</em> cực kỳ tự nhiên!</p>
+      </div>
+
+      <div class="setting-group">
+        <label for="setting-rate">Tốc độ phát âm mặc định: <strong id="setting-rate-val">0.96x</strong></label>
+        <input type="range" id="setting-rate" min="0.65" max="1.25" step="0.05" value="0.96" style="width:100%;accent-color:var(--brand);" />
+      </div>
+
+      <div class="setting-group">
+        <label for="setting-gemini-key">4. (Tuỳ chọn) Google Gemini API Key miễn phí để AI chấm bài Micro-Writing C1</label>
+        <input type="password" id="setting-gemini-key" class="input" placeholder="Dán khóa AIza... từ aistudio.google.com (chỉ lưu riêng trên máy bạn)" />
+        <p class="setting-hint">Khóa chỉ lưu trong <code>localStorage</code> trên trình duyệt của bạn, không bao giờ gửi lên GitHub hay máy chủ trung gian.</p>
+      </div>
+    </div>
+  </div>
 
   <!-- Footer -->
   <footer class="site-footer">
     <div class="container footer-inner">
       <div>
-        <strong>LingoCraft</strong> — Học tiếng Anh chủ động mỗi ngày · Lưu tiến độ cục bộ hoàn toàn miễn phí.
+        <strong>LingoCraft C1 Studio</strong> — Thiết kế theo lộ trình cá nhân 6 tháng B1+ → C1 · Phát âm tự nhiên miễn phí.
       </div>
-      <div class="footer-actions">
-        <button type="button" class="btn btn-secondary btn-sm" id="btn-export-progress">Sao lưu tiến độ (.json)</button>
+      <div style="display:flex;gap:8px;align-items:center;">
+        <button type="button" id="btn-export-backup" class="btn btn-secondary btn-sm">Sao lưu tiến độ (.json)</button>
         <label class="btn btn-secondary btn-sm" style="margin:0;cursor:pointer;">
           Khôi phục
-          <input type="file" id="input-import-progress" accept="application/json" class="sr-only" />
+          <input type="file" id="input-import-backup" accept="application/json" class="sr-only" />
         </label>
       </div>
     </div>
@@ -386,7 +582,8 @@
 
   <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
-  <script src="js/data.js"></script>
+  <script src="js/roadmap-data.js"></script>
+  <script src="js/sm2.js"></script>
   <script src="js/audio.js"></script>
   <script src="js/app.js"></script>
 </body>
