@@ -568,17 +568,79 @@ main { flex: 1; padding: 26px 0 64px; }
 }
 .footer-inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; }
 
+/* ==========================================================================
+   FOUNDATION A0 -> B1 REFRESHER COURSE
+   ========================================================================== */
+.foundation-stepper {
+  display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 10px; margin-bottom: 20px;
+}
+.f-step-btn {
+  text-align: left; padding: 13px 14px; border-radius: var(--radius-md);
+  border: 1px solid var(--border-subtle); background: var(--bg-surface);
+  display: flex; flex-direction: column; gap: 3px;
+  transition: all var(--transition-fast); box-shadow: var(--shadow-xs);
+}
+.f-step-btn:hover { border-color: var(--brand); transform: translateY(-1px); }
+.f-step-btn.active { background: var(--brand-soft); border-color: var(--brand); }
+.f-step-btn.completed { border-color: var(--success); }
+.f-step-lvl { font-size: 0.72rem; font-weight: 800; text-transform: uppercase; color: var(--brand-text); letter-spacing: 0.04em; }
+.f-step-btn strong { font-size: 0.87rem; color: var(--text-primary); line-height: 1.25; }
+.f-step-btn small { font-size: 0.74rem; color: var(--text-muted); }
+
+.ipa-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; margin: 14px 0 22px;
+}
+.ipa-card {
+  padding: 14px 16px; border-radius: var(--radius-md);
+  background: var(--bg-page); border: 1px solid var(--border-subtle);
+  display: flex; flex-direction: column; gap: 10px;
+}
+.ipa-pair-row { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.ipa-word-btn {
+  padding: 10px 10px; border-radius: var(--radius-sm);
+  border: 1px solid var(--border-subtle); background: var(--bg-surface);
+  text-align: center; transition: all var(--transition-fast);
+}
+.ipa-word-btn:hover { border-color: var(--brand); background: var(--brand-soft); }
+.ipa-word-btn strong { display: block; font-family: var(--font-serif); font-size: 1.15rem; }
+.ipa-word-btn code { font-family: var(--font-mono); font-size: 0.76rem; color: var(--brand-text); }
+.ipa-word-btn span { display: block; font-size: 0.74rem; color: var(--text-secondary); margin-top: 2px; }
+
+.f-grammar-list { display: flex; flex-direction: column; gap: 12px; margin: 12px 0 22px; }
+.f-grammar-card {
+  padding: 15px 18px; border-radius: var(--radius-md);
+  background: var(--bg-page); border: 1px solid var(--border-subtle);
+}
+.f-grammar-formula {
+  font-family: var(--font-mono); font-size: 0.82rem; color: var(--brand-text);
+  background: var(--brand-soft); padding: 7px 11px; border-radius: var(--radius-sm);
+  margin: 8px 0;
+}
+
+.phrase-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px; margin: 12px 0 22px;
+}
+.phrase-card {
+  padding: 14px 16px; border-radius: var(--radius-md);
+  background: var(--bg-page); border: 1px solid var(--border-subtle);
+  display: flex; flex-direction: column; gap: 6px;
+}
+.phrase-card-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+.phrase-card strong { font-family: var(--font-serif); font-size: 1.08rem; line-height: 1.25; }
+
 /* Responsive */
 @media (max-width: 940px) {
   .bottleneck-grid, .phase-grid, .today-grid, .srs-layout, .split-layout, .writing-layout, .speaking-studio {
     grid-template-columns: 1fr;
   }
+  .foundation-stepper { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .side-nav { flex-direction: row; overflow-x: auto; }
   .side-nav-item { min-width: 200px; }
   .upgrade-pair { grid-template-columns: 1fr; }
 }
 @media (max-width: 600px) {
   .sm2-grid { grid-template-columns: repeat(2, 1fr); }
+  .foundation-stepper { grid-template-columns: 1fr; }
   .flashcard-face { padding: 20px 18px; }
   .brand-sub, .hide-xs { display: none; }
 }

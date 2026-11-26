@@ -5,6 +5,7 @@
 (function () {
   const STORAGE_KEY = 'lingocraft_c1_state_v2';
   const DATA = window.C1_DATA;
+  const FOUNDATION = window.FOUNDATION_DATA;
   const AUDIO = window.LingoAudio;
   const SM2 = window.LingoSM2;
 
@@ -28,6 +29,8 @@
     streak: 1,
     lastStudyDate: todayStr(),
     completedUnits: [], // e.g. ['w1-2']
+    completedFoundation: [], // e.g. ['f-a0', 'f-a1', 'f-a2', 'f-b1']
+    foundationCheckpointBest: 0,
     dailyTasksDone: {}, // { '2026-11-25': ['m1', 'e1'] }
     sm2Records: {}, // { [cardId]: { reps, interval, ease, dueAt, lapses, lastReviewed } }
     customCollocations: [],
@@ -59,6 +62,9 @@
 
   // Ephemeral UI state
   let activeTab = 'roadmap';
+  let foundationStep = 'f-a0'; // 'f-a0' | 'f-a1' | 'f-a2' | 'f-b1' | 'checkpoint'
+  let foundationDrillAnswers = {};
+  let checkpointAnswers = {};
   let selectedDayOfWeek = new Date().getDay();
   let colCategory = 'all';
   let colDueOnly = false;
@@ -270,6 +276,11 @@
       errEl.textContent = unresolved;
       errEl.classList.toggle('hidden', unresolved === 0);
     }
+    const fPctEl = document.getElementById('nav-foundation-pct');
+    if (fPctEl && FOUNDATION) {
+      const pct = Math.round((state.completedFoundation.length / FOUNDATION.modules.length) * 100);
+      fPctEl.textContent = `${pct}%`;
+    }
   }
 
   function switchTab(tabId) {
@@ -287,11 +298,391 @@
     });
 
     if (tabId === 'roadmap') renderRoadmap();
+    if (tabId === 'foundation') renderFoundation();
     if (tabId === 'collocations') renderCollocationCard();
     if (tabId === 'grammar') renderGrammar();
     if (tabId === 'writing') renderWriting();
     if (tabId === 'speaking') renderSpeakingStudio();
     if (tabId === 'review') renderReviewTab();
+  }
+
+  /* ------------------------------------------------------------------------
+     TAB 1B: KHÓA ÔN TẬP NỀN TẢNG A0 → B1
+     ------------------------------------------------------------------------ */
+  function renderFoundation() {
+    if (!FOUNDATION) return;
+    const totalMods = FOUNDATION.modules.length;
+    const doneMods = state.completedFoundation.length;
+    const pct = Math.round((doneMods / totalMods) * 100);
+
+    const pText = document.getElementById('foundation-progress-text');
+    const pFill = document.getElementById('foundation-progress-fill');
+    if (pText) pText.textContent = `${doneMods} / ${totalMods} chặng (${pct}%)`;
+    if (pFill) pFill.style.width = `${pct}%`;
+
+    const stepper = document.getElementById('foundation-stepper');
+    if (!stepper) return;
+
+    const stepsHtml = FOUNDATION.modules
+      .map((m) => {
+        const done = state.completedFoundation.includes(m.id);
+        return `
+        <button type="button" class="f-step-btn ${foundationStep === m.id ? 'active' : ''} ${done ? 'completed' : ''}" data-fstep="${m.id}">
+          <span class="f-step-lvl">${done ? '✓ ' : ''}${esc(m.level)}</span>
+          <strong>${esc(m.title)}</strong>
+          <small>${m.grammarPoints.length} điểm ngữ pháp · ${m.drills.length} câu test</small>
+        </button>
+      `;
+      })
+      .join('');
+
+    const bestCk = state.foundationCheckpointBest || 0;
+    stepper.innerHTML =
+      stepsHtml +
+      `
+      <button type="button" class="f-step-btn ${foundationStep === 'checkpoint' ? 'active' : ''} ${bestCk >= 80 ? 'completed' : ''}" data-fstep="checkpoint">
+        <span class="f-step-lvl">${bestCk >= 80 ? '✓ ' : ''}TỔNG DUYỆT</span>
+        <strong>Kiểm tra Tốt nghiệp A0–B1</strong>
+        <small>${bestCk ? `Cao nhất: ${bestCk}%` : '10 câu tổng hợp'}</small>
+      </button>
+    `;
+
+    stepper.querySelectorAll('[data-fstep]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        foundationStep = btn.dataset.fstep;
+        renderFoundation();
+      });
+    });
+
+    if (foundationStep === 'checkpoint') {
+      renderFoundationCheckpoint();
+      return;
+    }
+
+    const mod = FOUNDATION.modules.find((m) => m.id === foundationStep) || FOUNDATION.modules[0];
+    const stage = document.getElementById('foundation-stage');
+    const isModDone = state.completedFoundation.includes(mod.id);
+
+    stage.innerHTML = `
+      <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:14px;">
+        <div>
+          <span class="badge badge-brand">${esc(mod.badge)}</span>
+          ${isModDone ? '<span class="badge badge-success" style="margin-left:6px;">✓ Đã hoàn thành chặng</span>' : ''}
+          <h3 style="font-family:var(--font-serif);font-size:1.6rem;margin:6px 0 4px;">${esc(mod.title)}</h3>
+          <p style="margin:0;color:var(--text-secondary);font-size:0.9rem;">${esc(mod.goal)}</p>
+        </div>
+        <button type="button" id="btn-f-mark-done" class="btn ${isModDone ? 'btn-secondary' : 'btn-primary'} btn-sm">
+          ${isModDone ? '✓ Đã đánh dấu xong' : 'Đánh dấu hoàn thành chặng'}
+        </button>
+      </div>
+
+      ${
+        mod.minimalPairs && mod.minimalPairs.length
+          ? `
+        <h4 style="font-size:1rem;margin:18px 0 6px;">1. Luyện phân biệt cặp âm IPA dễ nhầm (Bấm vào từng từ để nghe MP3 người thật)</h4>
+        <div class="ipa-grid">
+          ${mod.minimalPairs
+            .map(
+              (pair) => `
+            <div class="ipa-card">
+              <div style="font-size:0.78rem;font-weight:700;color:var(--brand-text);">${esc(pair.rule)}</div>
+              <div class="ipa-pair-row">
+                <button type="button" class="ipa-word-btn f-speak-word" data-word="${esc(pair.left)}">
+                  <strong>🔊 ${esc(pair.left)}</strong>
+                  <code>${esc(pair.leftIpa)}</code>
+                  <span>${esc(pair.leftVi)}</span>
+                </button>
+                <button type="button" class="ipa-word-btn f-speak-word" data-word="${esc(pair.right)}">
+                  <strong>🔊 ${esc(pair.right)}</strong>
+                  <code>${esc(pair.rightIpa)}</code>
+                  <span>${esc(pair.rightVi)}</span>
+                </button>
+              </div>
+              <div style="font-size:0.78rem;color:var(--text-secondary);">${esc(pair.tip)}</div>
+            </div>
+          `
+            )
+            .join('')}
+        </div>
+      `
+          : ''
+      }
+
+      <h4 style="font-size:1rem;margin:18px 0 6px;">${mod.minimalPairs ? '2.' : '1.'} Ngữ pháp nền tảng trình độ ${esc(mod.level)}</h4>
+      <div class="f-grammar-list">
+        ${mod.grammarPoints
+          .map(
+            (gp) => `
+          <div class="f-grammar-card">
+            <div style="font-weight:700;font-size:0.94rem;">${esc(gp.name)}</div>
+            <div class="f-grammar-formula">${esc(gp.formula)}</div>
+            <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;">
+              <div>
+                <div style="font-weight:600;font-size:0.9rem;">${esc(gp.example)}</div>
+                <div style="font-size:0.82rem;color:var(--text-secondary);">${esc(gp.exampleVi)}</div>
+              </div>
+              <button type="button" class="btn btn-secondary btn-sm f-speak-word" data-word="${esc(gp.example)}">🔊 Nghe ví dụ</button>
+            </div>
+          </div>
+        `
+          )
+          .join('')}
+      </div>
+
+      <h4 style="font-size:1rem;margin:18px 0 6px;">${mod.minimalPairs ? '3.' : '2.'} Mẫu câu &amp; Từ vựng cốt lõi ${esc(mod.level)} (Gửi thẳng sang Anki SM-2)</h4>
+      <div class="phrase-grid">
+        ${mod.phrases
+          .map(
+            (ph, idx) => `
+          <div class="phrase-card">
+            <div class="phrase-card-head">
+              <div>
+                <strong>${esc(ph.chunk)}</strong>
+                <div style="font-family:var(--font-mono);font-size:0.75rem;color:var(--text-muted);">${esc(ph.ipa)}</div>
+              </div>
+              <div style="display:flex;gap:4px;">
+                <button type="button" class="btn btn-secondary btn-sm f-speak-word" data-word="${esc(ph.chunk)}" title="Nghe cụm">🔊</button>
+                <button type="button" class="btn btn-soft btn-sm f-add-sm2" data-pidx="${idx}" title="Lưu vào bộ ôn SM-2">+ SM-2</button>
+              </div>
+            </div>
+            <div style="font-size:0.86rem;font-weight:600;color:var(--brand-text);">${esc(ph.vi)}</div>
+            <div style="font-size:0.8rem;color:var(--text-secondary);">${esc(ph.ex)}</div>
+          </div>
+        `
+          )
+          .join('')}
+      </div>
+
+      <div style="margin-top:22px;padding-top:18px;border-top:1px solid var(--border-subtle);">
+        <h4 style="font-size:1rem;margin:0 0 12px;">${mod.minimalPairs ? '4.' : '3.'} Bài tập kiểm tra nhanh chặng ${esc(mod.level)} (${mod.drills.length} câu)</h4>
+        <div style="display:flex;flex-direction:column;gap:16px;">
+          ${mod.drills
+            .map((dr, qi) => {
+              const key = `${mod.id}-${qi}`;
+              const chosen = foundationDrillAnswers[key];
+              const answered = typeof chosen === 'number';
+              return `
+              <div>
+                <div style="font-weight:600;margin-bottom:8px;">Câu ${qi + 1}: ${esc(dr.q)}</div>
+                <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:8px;">
+                  ${dr.options
+                    .map((opt, oi) => {
+                      let cls = 'quiz-option';
+                      if (answered) {
+                        if (oi === dr.answer) cls += ' correct';
+                        else if (oi === chosen) cls += ' wrong';
+                      }
+                      return `<button type="button" class="${cls}" style="padding:10px 12px;" data-fd-q="${qi}" data-fd-o="${oi}" ${answered ? 'disabled' : ''}>
+                        <span class="opt-key">${String.fromCharCode(65 + oi)}</span>
+                        <span>${esc(opt)}</span>
+                      </button>`;
+                    })
+                    .join('')}
+                </div>
+                ${
+                  answered
+                    ? `<div class="quiz-feedback ${chosen === dr.answer ? 'ok' : 'err'}">
+                        <strong>${chosen === dr.answer ? '✓ Chính xác!' : '✕ Chưa đúng (đã ghi vào Error Log).'}</strong> ${esc(dr.explain)}
+                      </div>`
+                    : ''
+                }
+              </div>
+            `;
+            })
+            .join('')}
+        </div>
+      </div>
+    `;
+
+    stage.querySelectorAll('.f-speak-word').forEach((btn) => {
+      btn.addEventListener('click', () => playSpeech(btn.dataset.word, { btn }));
+    });
+
+    stage.querySelectorAll('.f-add-sm2').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const ph = mod.phrases[Number(btn.dataset.pidx)];
+        if (!ph) return;
+        const already = state.customCollocations.some((c) => c.chunk === ph.chunk);
+        if (already) {
+          showToast(`"${ph.chunk}" đã có sẵn trong bộ SM-2 của bạn!`);
+          return;
+        }
+        state.customCollocations.unshift({
+          id: `f-sm2-${Date.now()}-${Math.random().toString(36).slice(2, 5)}`,
+          category: 'verb-noun',
+          level: mod.level,
+          headword: ph.word,
+          chunk: ph.chunk,
+          ipa: ph.ipa,
+          meaning: ph.vi,
+          trap: `Cụm nền tảng ${mod.level} được lưu từ Khóa Ôn Tập A0–B1.`,
+          example: ph.ex,
+          exampleVi: ph.vi
+        });
+        addXp(8, `Đã lưu "${ph.chunk}" vào bộ Anki SM-2!`);
+        rebuildCollocationDeck(false);
+        renderNavBadges();
+      });
+    });
+
+    document.getElementById('btn-f-mark-done').addEventListener('click', () => {
+      if (state.completedFoundation.includes(mod.id)) {
+        state.completedFoundation = state.completedFoundation.filter((x) => x !== mod.id);
+        saveState();
+      } else {
+        state.completedFoundation.push(mod.id);
+        addXp(25, `Hoàn thành chặng nền tảng ${mod.level}!`);
+      }
+      renderFoundation();
+      renderNavBadges();
+    });
+
+    stage.querySelectorAll('[data-fd-q]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const qi = Number(btn.dataset.fdQ);
+        const oi = Number(btn.dataset.fdO);
+        const key = `${mod.id}-${qi}`;
+        if (typeof foundationDrillAnswers[key] === 'number') return;
+
+        foundationDrillAnswers[key] = oi;
+        const dr = mod.drills[qi];
+        if (oi === dr.answer) {
+          addXp(10, `Đúng câu ôn nền ${mod.level}!`);
+        } else {
+          addErrorLogItem({
+            category: `Nền tảng ${mod.level}`,
+            wrong: `${dr.q} → Chọn nhầm: "${dr.options[oi]}"`,
+            correct: `Đáp án đúng: "${dr.options[dr.answer]}"`,
+            note: dr.explain
+          });
+        }
+
+        const allAnswered = mod.drills.every((_, i) => typeof foundationDrillAnswers[`${mod.id}-${i}`] === 'number');
+        if (allAnswered && !state.completedFoundation.includes(mod.id)) {
+          state.completedFoundation.push(mod.id);
+          addXp(25, `Hoàn thành bài tập chặng ${mod.level}!`);
+        }
+        renderFoundation();
+        renderNavBadges();
+      });
+    });
+  }
+
+  function renderFoundationCheckpoint() {
+    const stage = document.getElementById('foundation-stage');
+    const items = FOUNDATION.finalCheckpoint;
+    const answeredCount = Object.keys(checkpointAnswers).length;
+    let correctCount = 0;
+    items.forEach((it, idx) => {
+      if (checkpointAnswers[idx] === it.answer) correctCount += 1;
+    });
+    const finished = answeredCount === items.length;
+    const pct = Math.round((correctCount / items.length) * 100);
+
+    if (finished && pct > (state.foundationCheckpointBest || 0)) {
+      state.foundationCheckpointBest = pct;
+      saveState();
+    }
+
+    stage.innerHTML = `
+      <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px;">
+        <div>
+          <span class="badge badge-accent">Tổng duyệt Nền tảng A0 → B1</span>
+          <h3 style="font-family:var(--font-serif);font-size:1.55rem;margin:6px 0 4px;">Bài Kiểm Tra Tốt Nghiệp A0–B1 (10 câu)</h3>
+          <p style="margin:0;color:var(--text-secondary);font-size:0.88rem;">
+            Đạt từ <strong>80% trở lên (≥ 8/10)</strong> để xác nhận gốc A0–B1 đã thật sự vững vàng trước khi tăng tốc toàn lực sang B2/C1.
+          </p>
+        </div>
+        <button type="button" id="btn-ck-reset" class="btn btn-secondary btn-sm">Làm lại từ đầu</button>
+      </div>
+
+      ${
+        finished
+          ? `
+        <div style="padding:16px 18px;border-radius:var(--radius-md);background:${pct >= 80 ? 'var(--success-soft)' : 'var(--warning-soft)'};margin-bottom:18px;">
+          <strong style="font-size:1.05rem;">Kết quả tổng duyệt: ${correctCount}/${items.length} (${pct}%)</strong>
+          <p style="margin:4px 0 10px;font-size:0.88rem;">
+            ${
+              pct >= 80
+                ? 'Xuất sắc! Gốc A0–B1 của bạn rất vững — bạn đã sẵn sàng tập trung tối đa vào Collocations SM-2 và Ngữ pháp C1!'
+                : 'Một vài mảng nền tảng vẫn còn hổng nhẹ (các câu sai đã tự động ghi vào Error Log). Hãy ôn lại các chặng tương ứng nhé.'
+            }
+          </p>
+          ${pct >= 80 ? '<button type="button" id="btn-jump-c1" class="btn btn-primary btn-sm">Tiến lên Lộ trình C1 →</button>' : ''}
+        </div>
+      `
+          : ''
+      }
+
+      <div style="display:flex;flex-direction:column;gap:16px;">
+        ${items
+          .map((it, idx) => {
+            const chosen = checkpointAnswers[idx];
+            const answered = typeof chosen === 'number';
+            return `
+            <div>
+              <div style="font-weight:600;margin-bottom:8px;">
+                <span class="badge badge-neutral" style="margin-right:6px;">${esc(it.level)}</span>
+                Câu ${idx + 1}: ${esc(it.q)}
+              </div>
+              <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:8px;">
+                ${it.options
+                  .map((opt, oi) => {
+                    let cls = 'quiz-option';
+                    if (answered) {
+                      if (oi === it.answer) cls += ' correct';
+                      else if (oi === chosen) cls += ' wrong';
+                    }
+                    return `<button type="button" class="${cls}" style="padding:10px 12px;" data-ck-q="${idx}" data-ck-o="${oi}" ${answered ? 'disabled' : ''}>
+                      <span class="opt-key">${String.fromCharCode(65 + oi)}</span>
+                      <span>${esc(opt)}</span>
+                    </button>`;
+                  })
+                  .join('')}
+              </div>
+              ${
+                answered
+                  ? `<div class="quiz-feedback ${chosen === it.answer ? 'ok' : 'err'}">
+                      <strong>${chosen === it.answer ? '✓ Chính xác!' : '✕ Chưa đúng (đã lưu Error Log).'}</strong> ${esc(it.explain)}
+                    </div>`
+                  : ''
+              }
+            </div>
+          `;
+          })
+          .join('')}
+      </div>
+    `;
+
+    document.getElementById('btn-ck-reset').addEventListener('click', () => {
+      checkpointAnswers = {};
+      renderFoundationCheckpoint();
+    });
+
+    const jumpBtn = document.getElementById('btn-jump-c1');
+    if (jumpBtn) jumpBtn.addEventListener('click', () => switchTab('collocations'));
+
+    stage.querySelectorAll('[data-ck-q]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const idx = Number(btn.dataset.ckQ);
+        const oi = Number(btn.dataset.ckO);
+        if (typeof checkpointAnswers[idx] === 'number') return;
+
+        checkpointAnswers[idx] = oi;
+        const it = items[idx];
+        if (oi === it.answer) {
+          addXp(10);
+        } else {
+          addErrorLogItem({
+            category: `Nền tảng ${it.level}`,
+            wrong: `${it.q} → Chọn nhầm: "${it.options[oi]}"`,
+            correct: `Đáp án đúng: "${it.options[it.answer]}"`,
+            note: it.explain
+          });
+        }
+        renderFoundation();
+      });
+    });
   }
 
   /* ------------------------------------------------------------------------
@@ -1845,6 +2236,7 @@ Hãy nhận xét ngắn gọn bằng tiếng Việt theo 4 mục rõ ràng:
     renderHeader();
     updateSessionClockUI();
     renderRoadmap();
+    renderFoundation();
     renderCollocationCategories();
     rebuildCollocationDeck(false);
     renderGrammar();
